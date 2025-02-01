@@ -1,24 +1,23 @@
 .footer-div {
-    position: relative;
-    min-height: 100px;
     width: 100%;
     background-color: #DBE2EF;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 500;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
 }
 
 .footer-notes {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    position: absolute;
-    bottom: 10px;
 }
 
 .footer-notes p {
     color: #112D4E;
+    margin: 0;
 }
 
 .footer-div a {

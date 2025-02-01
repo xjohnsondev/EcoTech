@@ -2,7 +2,7 @@ import './Home.css';
 import { useState } from 'react';
 import { Tabs, Tab, Image, Row, Col } from 'react-bootstrap';
 import Map from './Map';
-import Footer from "./Footer";
+import Footer from './Footer';
 import RecyclingImage1 from './images/recycle-image1.gif'
 import RecyclingImage2 from './images/recycle-image2.jpg'
 
@@ -79,6 +79,7 @@ const Home = () => {
                 </div>
             </div>
             <Footer />
+
         </div>
     )
 }
