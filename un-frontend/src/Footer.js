@@ -7,8 +7,10 @@ const Footer = () => {
             {/* Spacer div with background color */}
             {/* <div style={{ height: '100px' }}></div> */}
             <div className="footer-notes">
-                <p>Copyright © 2025, Ecotech</p>
-                {/* <Link><p className="footer-link">Geolocation</p></Link> */}
+            <p>© 2025 EcoTech</p>
+            <p> All rights reserved</p>                
+            {/* <p>For more information or support, contact us at [email].</p> */}
+            {/* <Link><p className="footer-link">Geolocation</p></Link> */}
             </div>
         </div>
     )

@@ -85,7 +85,7 @@
     animation: fadeInLeft 0.5s ease-in-out forwards;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .what-we-do div:nth-child(1) {
@@ -106,7 +106,6 @@
 }
 
 .what-we-do div span {
-    position: relative;
     font-size: .75em;
     color:#F9F7F7;
 }
@@ -128,15 +127,79 @@
 }
 
 .about-content {
-    margin: 24px 100px 0 100px;
+    background-color: #112D4E;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-content h2,
 .about-content p,
 .about-content li {
-    color: #112D4E;
+    color: white;
 }
 
-.about-content ul {
+.features-list {
     list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.features-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 30vw;
+    font-size: 1.75em;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 940px) {
+
+    .about-title-div {
+        display: none;
+    }
+
+/* 
+    .about-title-div h1 {
+        font-size: 1.8em;
+    }
+
+    .about-title-div p {
+        font-size: 0.9em;
+        max-width: 100%;
+    } */
+
+    .about-whatwedo-div {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .about-whatwedo-div h2 {
+        position: absolute;
+        top: 0;
+    }
+
+    .about-content {
+        height: 100%;
+        padding: 75px;
+    }
+
+    .features-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .features-list li {
+        align-items: center;
+    }
+
+    .features-list li strong {
+        width: 60vw;
+    }
 }

@@ -4,6 +4,8 @@ import { Image } from 'react-bootstrap';
 import Renewable from './images/renewable.png';
 import Earth from './images/planet-earth.png';
 import Solution from './images/solution.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRecycle, faHandshake, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import './About.css';
 
 const About = () => {
@@ -40,32 +42,24 @@ const About = () => {
                             </p>
                         </div>
 
-
                     </div>
                 </div>
             </section>
             <section className='about-content'>
-
-                {/* <div>
-                    <h2>Why EcoTech?</h2>
-                    <p>Every year, millions of tons of electronic waste end up in landfills, harming our environment. Many people want to recycle their old devices but struggle to find the right facilities. EcoTech simplifies the process by providing an intuitive way to locate nearby e-waste recycling centers, ensuring responsible disposal of electronics.</p>
-                </div> */}
-                <div>
-                    <h2>Features</h2>
-                    <ul>
-                        <li><strong>Find Nearby Recycling Centers</strong>: Easily locate the nearest e-waste recycling facilities with accurate information.</li>
-                        <li><strong>Verified Locations</strong>: We provide reliable and up-to-date details about approved recycling centers.</li>
-                        {/* <li><strong>Eco-Friendly Resources</strong>: Learn about proper e-waste disposal, sustainability tips, and the impact of recycling.</li> */}
-                        <li><strong>User-Friendly Experience</strong>: Our simple and intuitive interface makes recycling hassle-free.</li>
+                    <ul className='features-list'>
+                        <li>
+                            <FontAwesomeIcon icon={faRecycle} size="4x" color="#3F72AF" />
+                            <strong>Find Nearby <br/> Recycling Centers</strong>
+                        </li>
+                        <li>
+                             <FontAwesomeIcon icon={faCircleCheck} size="4x" color="#3F72AF" />
+                            <strong>Verified <br/> Locations</strong>
+                        </li>
+                        <li>
+                            <FontAwesomeIcon icon={faHandshake} size="4x" color="#3F72AF" />
+                            <strong>User-Friendly <br/> Experience</strong>
+                        </li>
                     </ul>
-                </div>
-                <div>
-                    <h2>Join the Movement</h2>
-                    <p>By using EcoTech, you’re contributing to a cleaner planet and a sustainable future. Start making a difference today by finding the right place to recycle your old electronics.</p>
-                </div>
-                <footer>
-                    <p>For more information or support, contact us at [your email or website link].</p>
-                </footer>
             </section>
             <Footer />
         </div>
