@@ -12,6 +12,13 @@
     font-weight: 800;
 }
 
+.navbar-dropdown {
+    position: relative;
+    width: 50px !important; 
+    background-color: #DBE2EF;
+    margin-top: 7px;
+}
+
 .nav-link {
     color: #112D4E;
     font-weight: 400;

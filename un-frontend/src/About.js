@@ -24,7 +24,7 @@ const About = () => {
                             <Image src={Renewable} className='about-header-img' />
                             <p>
                                 Simplify E-Waste Recycling <br />
-                                <span>We connect individuals and trusted recycling centers</span>
+                                <span>We help you find trusted recycling centers</span>
                             </p>
                         </div>
                         <div>

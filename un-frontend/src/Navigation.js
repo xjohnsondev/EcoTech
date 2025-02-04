@@ -7,7 +7,7 @@ const Navigation = () => {
       <Container>
         <Navbar.Brand href="/">EcoTech</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className='navbar-dropdown'>
           <Nav className="me-auto">
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/map-demo">Find Centers</Nav.Link>

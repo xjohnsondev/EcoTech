@@ -1,6 +1,6 @@
 import './Home.css';
 import { useState } from 'react';
-import { Tabs, Tab, Image, Row, Col } from 'react-bootstrap';
+import { Container, Tabs, Tab, Image, Row, Col } from 'react-bootstrap';
 import Map from './Map';
 import Footer from './Footer';
 import RecyclingImage1 from './images/recycle-image1.gif'
@@ -8,7 +8,17 @@ import RecyclingImage2 from './images/recycle-image2.jpg'
 
 const Home = () => {
     const [activeKey, setActiveKey] = useState("about");
+    const items = Array.from({ length: 10 }, (_, i) => i + 1);
+    const shortsURLs = [
+        "https://youtube.com/embed/30GLNyJRInk?si=9BKwKT_UjJk9fThX",
+        "https://youtube.com/embed/BeBFDgxK9L4?si=Q1OT8aA2FAlZbqv1",
+        "https://youtube.com/embed/knb83JLROGg?si=2fXcYilKgbKpr9fY",
+        "https://youtube.com/embed/jCBVUK-StYY?si=BTyEaOgRsrH-UhMO",
+        "https://youtube.com/embed/w4Sl6ngKY6o?si=CiUmJTG8tOOR76qA",
+        "https://youtube.com/embed/Oa4mmM1hXIc?si=_0H0DLDUG_uxp4qU",
+        "https://youtube.com/embed/s5ykSDbfECI?si=AmAebqh2L5s4338z",
 
+    ];
     return (
         <div className="homepage">
             <div className='header'>
@@ -23,60 +33,39 @@ const Home = () => {
                     </Col>
                 </Row>
             </div>
+
+            <Container>
+                <div
+                    style={{
+                        display: "flex",
+                        overflowX: "auto",
+                        gap: "50px",
+                        padding: "25px 5px",
+                        whiteSpace: "nowrap",
+                        scrollbarWidth: "thin",
+                        scrollBehavior: "smooth",
+                    }}
+                >
+                    {shortsURLs.map((short) => (
+                        <iframe 
+                        className="short"
+                        width="176" 
+                        height="315" 
+                        src={short}
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        >
+                      </iframe>
+                    ))}
+                </div>
+            </Container>
+
             <div className='content-row'>
+                <h2>EcoMap</h2>
                 <div className="hp-map-container">
                     <Map className="hp-map" />
                 </div>
-                <div className='hp-info'>
-                    <Tabs
-                        activeKey={activeKey}
-                        onSelect={(k) => setActiveKey(k)} // Update active tab
-                        id="tabs"
-                    >
-                        <Tab eventKey="about" title="About" className='hp-tab'>
-                            <div className='tab-content'>
-                                <h2>What Is E-Waste?</h2>
-                                <p>Electronic Waste, Or E-Waste, <br /> Refers To Discarded Electronic Devices And Components.</p>
-                                <ul className="recycle-list">
-                                    <li>Examples include smartphones, computers, TVs, and batteries</li>
-                                    <li>E-waste often contains hazardous materials like lead and mercury</li>
-                                    <li>Recycling e-waste reduces environmental pollution</li>
-                                    <li>Proper disposal helps recover valuable resources such as metals and plastics</li>
-                                    <li>Awareness of e-waste recycling promotes sustainable practices</li>
-                                </ul>
-                            </div>
-                        </Tab>
-                        <Tab eventKey="why" title="Why Recycle" className='hp-tab'>
-                            <div className='tab-content'>
-                                <h2>Why Should You Recycle E-Waste?</h2>
-                                <p>Protect The Planet, Conserve Resources, And Build A Sustainable Future.</p>
-                                <ul className="recycle-list">
-                                    <li>Environmental Protection</li>
-                                    <li>Resource Conservation</li>
-                                    <li>Energy Savings</li>
-                                    <li>Reduction of Greenhouse Gases</li>
-                                    <li>Reduction in Landfill Waste</li>
-                                    <li>Job Creation</li>
-                                    <li>Data Security</li>
-                                </ul>
-                            </div>
-                        </Tab>
-                        <Tab eventKey="future" title="Future Of Recycling" className='hp-tab'>
-                            <div className='tab-content'>
-                                <h2>Shaping A Sustainable Future</h2>
-                                <p>How Innovations In Recycling Drive A Greener Tomorrow</p>
-                                <ul className="recycle-list">
-                                    <li>Growing Innovation In Recycling Technology</li>
-                                    <li>Shift To A Circular Economy</li>
-                                    <li>Government Initiative And Global Policies</li>
-                                    <li>Rise Of Urban Mining</li>
-                                    <li>Recycled Electronics In Manufacturing</li>
-                                    <li>Consumer Awareness And Responsible Disposal</li>
-                                </ul>
-                            </div>
-                        </Tab>
-                    </Tabs>
-                </div>
+
             </div>
             <Footer />
 

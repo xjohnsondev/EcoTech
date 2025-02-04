@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import data from './data.json';
 import UseShowMarkerDetails from './hooks/UseShowMarkerDetails';
+import './Map.css';
 
 const Map = () => {
     // Default location of NYC
@@ -99,12 +100,7 @@ const Map = () => {
 
     return (
 
-        <div style={{ 
-            width: '100%', 
-            height: '100%', 
-            minHeight: '400px', 
-            position: 'relative',
-        }}
+        <div className='map-container' 
             id="mapContainer"
         >
             {selectedPlace && (
