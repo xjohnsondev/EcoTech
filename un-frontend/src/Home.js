@@ -8,7 +8,6 @@ import RecyclingImage2 from './images/recycle-image2.jpg'
 
 const Home = () => {
     const [activeKey, setActiveKey] = useState("about");
-    const items = Array.from({ length: 10 }, (_, i) => i + 1);
     const shortsURLs = [
         "https://youtube.com/embed/30GLNyJRInk?si=9BKwKT_UjJk9fThX",
         "https://youtube.com/embed/BeBFDgxK9L4?si=Q1OT8aA2FAlZbqv1",
@@ -39,7 +38,7 @@ const Home = () => {
                     style={{
                         display: "flex",
                         overflowX: "auto",
-                        gap: "50px",
+                        gap: "30px",
                         padding: "25px 5px",
                         whiteSpace: "nowrap",
                         scrollbarWidth: "thin",
@@ -49,8 +48,8 @@ const Home = () => {
                     {shortsURLs.map((short) => (
                         <iframe 
                         className="short"
-                        width="176" 
-                        height="315" 
+                        width="220" 
+                        height="391" 
                         src={short}
                         title="YouTube video player" 
                         frameborder="0" 

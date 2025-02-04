@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-
 .navbar {
     background-color: #DBE2EF;
-    height: 55px;
     z-index: 1000;
     font-family: 'Poppins';
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;             
+    padding: 0 15px;   
+    height: 55px;            
 }
 
 .navbar-brand {
@@ -14,14 +16,15 @@
 
 .navbar-dropdown {
     position: relative;
-    width: 50px !important; 
     background-color: #DBE2EF;
-    margin-top: 7px;
 }
 
 .nav-link {
     color: #112D4E;
     font-weight: 400;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
 }
 
 .nav-link:hover {
