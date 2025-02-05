@@ -45,14 +45,15 @@ const Home = () => {
                         scrollBehavior: "smooth",
                     }}
                 >
-                    {shortsURLs.map((short) => (
+                    {shortsURLs.map((short, index) => (
                         <iframe 
+                        key= {index}
                         className="short"
                         width="220" 
                         height="391" 
                         src={short}
                         title="YouTube video player" 
-                        frameborder="0" 
+                        frameBorder="0" 
                         >
                       </iframe>
                     ))}

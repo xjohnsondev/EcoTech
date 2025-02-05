@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import data from './data.json';
+// import data from './data.json';
 import UseShowMarkerDetails from './hooks/UseShowMarkerDetails';
+import axios from 'axios';
 import './Map.css';
 
 const Map = () => {
@@ -9,6 +10,23 @@ const Map = () => {
     const [map, setMap] = useState(null);
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [show, setShow] = useState(false);
+    const [centers , setCenters] = useState({});
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // Fetch all recycling centers from database
+        const fetchCenters = async () => {
+            try {
+                const response = await axios.get("http://localhost:8080/getCenters");
+                console.log(response.data);
+                setCenters(response.data);
+            } catch (error) {
+                setError("Failed to fetch centers");
+                console.error("Error fetching centers:", error);
+            }
+        };   
+        fetchCenters();
+    }, []); 
 
     useEffect(() => {
         // Get user location if location sharing. If not, defaults to NYC
@@ -64,12 +82,12 @@ const Map = () => {
 
     useEffect(() => {
         const placeMarkers = () => {
-            if (!map || !data || data.length === 0 || !window.H) {
+            if (!map || !centers || centers.length === 0 || !window.H) {
                 return;
             }
 
             // Create icon and add to map
-            data.forEach((place) => {
+            centers.forEach((place) => {
                 const svgMarkup = '<svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
                     '<path fill="green" d="M12 2C8.13 2 5 5.13 5 9c0 4.97 7 13 7 13s7-8.03 7-13c0-3.87-3.13-7-7-7z"/>' +
                     '<circle cx="12" cy="9" r="4" fill="#F9F7F7"/>' +
