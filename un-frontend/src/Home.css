@@ -9,7 +9,7 @@
     position: relative;
     background-color: #112D4E;
     width: 100vw;
-    height: 400px; 
+    height: 400px;
     font-family: 'Poppins';
 }
 
@@ -58,10 +58,15 @@
     padding-bottom: 100px;
 }
 
-@media (max-width: 1200px) {
-    .header-photos {
-        display: none;
-    }
+.shorts-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 25px 5px;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: #3F72AF #DBE2EF; /* Thumb color | Track color */
 }
 
 .short {
@@ -93,4 +98,10 @@
     height: 400px;
     position: relative;
     padding-bottom: 200px;
+}
+
+@media (max-width: 1200px) {
+    .header-photos {
+        display: none;
+    }
 }

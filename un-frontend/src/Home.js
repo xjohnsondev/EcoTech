@@ -5,19 +5,13 @@ import Map from './Map';
 import Footer from './Footer';
 import RecyclingImage1 from './images/recycle-image1.gif'
 import RecyclingImage2 from './images/recycle-image2.jpg'
+import shortsConfig from "./config/shortsConfig.json";
+
 
 const Home = () => {
     const [activeKey, setActiveKey] = useState("about");
-    const shortsURLs = [
-        "https://youtube.com/embed/30GLNyJRInk?si=9BKwKT_UjJk9fThX",
-        "https://youtube.com/embed/BeBFDgxK9L4?si=Q1OT8aA2FAlZbqv1",
-        "https://youtube.com/embed/knb83JLROGg?si=2fXcYilKgbKpr9fY",
-        "https://youtube.com/embed/jCBVUK-StYY?si=BTyEaOgRsrH-UhMO",
-        "https://youtube.com/embed/w4Sl6ngKY6o?si=CiUmJTG8tOOR76qA",
-        "https://youtube.com/embed/Oa4mmM1hXIc?si=_0H0DLDUG_uxp4qU",
-        "https://youtube.com/embed/s5ykSDbfECI?si=AmAebqh2L5s4338z",
+    const shortsURLs = shortsConfig.shortsURLs;
 
-    ];
     return (
         <div className="homepage">
             <div className='header'>
@@ -34,17 +28,7 @@ const Home = () => {
             </div>
 
             <Container>
-                <div
-                    style={{
-                        display: "flex",
-                        overflowX: "auto",
-                        gap: "30px",
-                        padding: "25px 5px",
-                        whiteSpace: "nowrap",
-                        scrollbarWidth: "thin",
-                        scrollBehavior: "smooth",
-                    }}
-                >
+                <div className="shorts-container">
                     {shortsURLs.map((short, index) => (
                         <iframe 
                         key= {index}
