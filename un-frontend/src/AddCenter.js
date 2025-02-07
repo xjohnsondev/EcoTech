@@ -49,14 +49,14 @@ const AddCenter = () => {
     return (
         <Container fluid className='ac-body'>
             <div className='flex-cont'>
-
                 <Container className='ac-form-container'>
-                    <h1>Register Your Business Center</h1>
+                    <h1>Register a Recycling Center</h1>
+
                     <Form onSubmit={handleCenterSubmit} className='ac-form'>
                         <Row className='mb-3'>
                             <Col md={7}>
                                 <Form.Group controlId='formBusinessName'>
-                                    <Form.Label>Business Name</Form.Label>
+                                    <Form.Label>Business Name *</Form.Label>
                                     <Form.Control type='text' placeholder='' className='ac-input' ref={businessNameRef} required />
                                 </Form.Group>
                             </Col>
@@ -83,7 +83,7 @@ const AddCenter = () => {
                         <Row className='mb-3'>
                             <Col xs={12}>
                                 <Form.Group controlId='formStreetName'>
-                                    <Form.Label>Street</Form.Label>
+                                    <Form.Label>Street *</Form.Label>
                                     <Form.Control type='text' className='ac-input' ref={streetNameRef} required />
                                 </Form.Group>
                             </Col>
@@ -91,13 +91,13 @@ const AddCenter = () => {
                         <Row>
                             <Col md={5}>
                                 <Form.Group controlId='formCity'>
-                                    <Form.Label>City</Form.Label>
+                                    <Form.Label>City *</Form.Label>
                                     <Form.Control type='text' className='ac-input' ref={cityRef} required />
                                 </Form.Group>
                             </Col>
                             <Col md={4}>
                                 <Form.Group controlId='formState'>
-                                    <Form.Label>State</Form.Label>
+                                    <Form.Label>State *</Form.Label>
                                     <Form.Select className='ac-input' ref={stateRef} required>
                                         <option value="" disabled>
                                             SELECT
@@ -112,7 +112,7 @@ const AddCenter = () => {
                             </Col>
                             <Col md={3}>
                                 <Form.Group controlId='formZipCode'>
-                                    <Form.Label>Zip</Form.Label>
+                                    <Form.Label>Zip *</Form.Label>
                                     <Form.Control
                                         type='text'
                                         className='ac-input'

@@ -1,2 +1,9 @@
-package com.xjohnsondev.ewaste_backend.repository;public interface AdminRepo {
+package com.xjohnsondev.ewaste_backend.repository;
+
+import com.xjohnsondev.ewaste_backend.model.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+public interface AdminRepo extends JpaRepository<Admin, Long> {
+    Optional<Admin> findByUsername(String username);
 }
