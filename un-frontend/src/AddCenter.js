@@ -3,22 +3,12 @@ import { useState, useRef } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import Footer from "./Footer";
 import UseGetLatLong from './hooks/UseGetLatLng';
+import statesConfig from './config/statesConfig.json';
 
 const AddCenter = () => {
     const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null })
     const [isZipValid, setIsZipValid] = useState(true);
-
-    const stateOptions = [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-        'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
-        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-        'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
-        'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
-        'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
-        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
-        'Wisconsin', 'Wyoming'
-    ];
+    const states = statesConfig.statesOptions;
 
     const businessNameRef = useRef();
     const businessContactRef = useRef();
@@ -112,7 +102,7 @@ const AddCenter = () => {
                                         <option value="" disabled>
                                             SELECT
                                         </option>
-                                        {stateOptions.map((state, index) => (
+                                        {states.map((state, index) => (
                                             <option key={index} value={state}>
                                                 {state}
                                             </option>
