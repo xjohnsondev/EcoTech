@@ -17,7 +17,7 @@ const RoutesList = () => {
                 <Route exact path ="/" element={<Home />} />
                 <Route exact path ="/about" element={<About />} />
                 <Route exact path="/add-center" element={<AddCenter />} />
-                <Route exact path="/login-signup" element={<LoginSignup />} />
+                {/* <Route exact path="/login-signup" element={<LoginSignup />} /> */}
                 <Route exact path="/admin-portal" element={<AdminPortal />} />
                 <Route exact path="/admin-users" element={<AdminUsers />} />
                 <Route path="*" element={<NotFound />} />
