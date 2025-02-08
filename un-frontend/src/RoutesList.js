@@ -6,7 +6,8 @@ import AddCenter from "./AddCenter";
 import Home from "./Home";
 import About from "./About";
 import Footer from "./Footer";
-
+import AdminPortal from "./AdminPortal";
+import AdminUsers from "./AdminUsers";
 
 const RoutesList = () => {
     return (
@@ -17,6 +18,8 @@ const RoutesList = () => {
                 <Route exact path ="/about" element={<About />} />
                 <Route exact path="/add-center" element={<AddCenter />} />
                 <Route exact path="/login-signup" element={<LoginSignup />} />
+                <Route exact path="/admin-portal" element={<AdminPortal />} />
+                <Route exact path="/admin-users" element={<AdminUsers />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             {/* <Footer /> */}

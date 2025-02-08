@@ -9,7 +9,6 @@ import shortsConfig from "./config/shortsConfig.json";
 
 
 const Home = () => {
-    const [activeKey, setActiveKey] = useState("about");
     const shortsURLs = shortsConfig.shortsURLs;
 
     return (

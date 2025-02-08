@@ -16,7 +16,7 @@ public class CenterController {
     @Autowired
     private CenterRepo centerRepo;
 
-    @GetMapping("/getCenters")
+    @GetMapping("/get-centers")
     public List<Center> getAllCenters() {
         List<Center> centers = centerRepo.findAll();
         if (centers.isEmpty()) {
@@ -25,12 +25,19 @@ public class CenterController {
         return centers;
     }
 
-    @PostMapping("/addCenter")
-    public Center newCenter(@RequestBody Center newCenter) {
-        if (newCenter.getName() == null || newCenter.getAddress() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name and Address are required");
+    @PostMapping("/add-centers")
+    public List<Center> newCenters(@RequestBody List<Center> newCenters) {
+        if (newCenters.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "List cannot be empty");
         }
-        return centerRepo.save(newCenter);
+
+        for (Center center : newCenters) {
+            if (center.getName() == null || center.getAddress() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Each center must have a Name and Address");
+            }
+        }
+
+        return centerRepo.saveAll(newCenters);
     }
 
 

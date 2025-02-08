@@ -1,0 +1,10 @@
+.admin-login-display {
+    height: 100vh;
+    background-color: #DBE2EF;
+    font-family: 'Poppins';
+}
+
+.admin-navlink {
+    font-size: 1.25rem;
+    margin-top: 10px;
+}

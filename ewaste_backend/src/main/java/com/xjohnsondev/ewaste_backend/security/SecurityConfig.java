@@ -43,6 +43,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll() // Allow access to /login
+
+
+                        /// BE SURE TO REMOVE OTHER requestMatchers before launch
+                        .requestMatchers("/get-centers").permitAll()
+                        .requestMatchers("/add-centers").permitAll()
+                        .requestMatchers("/create-admin").permitAll()
+                        .requestMatchers("/get-admin-users").permitAll()
                         .anyRequest().authenticated() // Require authentication for all other requests
                 )
                 .sessionManagement(session -> session

@@ -5,7 +5,8 @@
         "phone": "(866) 603-0525",
         "latitude": 33.470772,
         "longitude": -112.100276,
-        "description": "A leading provider of electronic recycling services, offering safe and environmentally friendly solutions for recycling old electronics in the Phoenix area."
+        "description": "A leading provider of electronic recycling services, offering safe and environmentally friendly solutions for recycling old electronics in the Phoenix area.",
+        "status": "APPROVED"
     },
     {
         "name": "Green Chip Recycling",
@@ -13,7 +14,8 @@
         "phone": "(602) 256-9728",
         "latitude": 33.424829,
         "longitude": -112.116888,
-        "description": "Specializes in responsible e-waste recycling, ensuring that electronics are processed safely and efficiently to minimize environmental impact."
+        "description": "Specializes in responsible e-waste recycling, ensuring that electronics are processed safely and efficiently to minimize environmental impact.",
+        "status": "APPROVED"
     },
     {
         "name": "E-Waste Recycling",
@@ -21,7 +23,8 @@
         "phone": "(928) 537-3511",
         "latitude": 34.223777,
         "longitude": -110.028692,
-        "description": "A local recycling center dedicated to managing electronic waste with a focus on sustainability and community service."
+        "description": "A local recycling center dedicated to managing electronic waste with a focus on sustainability and community service.",
+        "status": "APPROVED"
     },
     {
         "name": "All Green Electronics Recycling",
@@ -29,7 +32,8 @@
         "phone": "(800) 780-0347",
         "latitude": 37.769174,
         "longitude": -122.388617,
-        "description": "Offers nationwide recycling solutions for electronics, including secure data destruction and e-waste recycling services in the San Francisco area."
+        "description": "Offers nationwide recycling solutions for electronics, including secure data destruction and e-waste recycling services in the San Francisco area.",
+        "status": "APPROVED"
     },
     {
         "name": "TechWaste Recycling",
@@ -37,7 +41,8 @@
         "phone": "(310) 530-8300",
         "latitude": 33.899382,
         "longitude": -118.366913,
-        "description": "A certified recycler that provides convenient and compliant disposal options for electronic devices, ensuring proper handling of hazardous materials."
+        "description": "A certified recycler that provides convenient and compliant disposal options for electronic devices, ensuring proper handling of hazardous materials.",
+        "status": "APPROVED"
     },
     {
         "name": "E-Waste Collection Center",
@@ -45,7 +50,8 @@
         "phone": "(818) 840-2000",
         "latitude": 34.191904,
         "longitude": -118.319351,
-        "description": "A drop-off location for electronics recycling, committed to helping residents safely dispose of their e-waste."
+        "description": "A drop-off location for electronics recycling, committed to helping residents safely dispose of their e-waste.",
+        "status": "APPROVED"
     },
     {
         "name": "Eco-Collection Center",
@@ -53,7 +59,8 @@
         "phone": "(510) 577-6083",
         "latitude": 37.724926,
         "longitude": -122.156076,
-        "description": "A center dedicated to recycling and managing electronic waste, promoting eco-friendly practices in the San Leandro area."
+        "description": "A center dedicated to recycling and managing electronic waste, promoting eco-friendly practices in the San Leandro area.",
+        "status": "APPROVED"
     },
     {
         "name": "WeRecycle!",
@@ -61,7 +68,8 @@
         "phone": "(602) 256-7999",
         "latitude": 33.454503,
         "longitude": -112.079392,
-        "description": "Provides safe and efficient recycling services for electronic devices, helping to reduce e-waste in the Phoenix community."
+        "description": "Provides safe and efficient recycling services for electronic devices, helping to reduce e-waste in the Phoenix community.",
+        "status": "APPROVED"
     },
     {
         "name": "Computer Recycling Center",
@@ -69,7 +77,8 @@
         "phone": "(323) 932-9100",
         "latitude": 34.040713,
         "longitude": -118.331931,
-        "description": "Specializes in the recycling and refurbishment of computers and electronics, ensuring devices are properly recycled or reused."
+        "description": "Specializes in the recycling and refurbishment of computers and electronics, ensuring devices are properly recycled or reused.",
+        "status": "APPROVED"
     },
     {
         "name": "Wired Recycling",
@@ -77,7 +86,8 @@
         "phone": "(213) 477-1477",
         "latitude": 34.045007,
         "longitude": -118.234726,
-        "description": "A trusted e-waste recycling center that focuses on the proper disposal of electronic waste in downtown Los Angeles."
+        "description": "A trusted e-waste recycling center that focuses on the proper disposal of electronic waste in downtown Los Angeles.",
+        "status": "APPROVED"
     },
     {
         "name": "E-Waste Center",
@@ -85,7 +95,8 @@
         "phone": "(323) 543-2384",
         "latitude": 34.09707,
         "longitude": -118.2326,
-        "description": "Offers convenient drop-off services for a wide range of electronic devices, helping to keep e-waste out of landfills."
+        "description": "Offers convenient drop-off services for a wide range of electronic devices, helping to keep e-waste out of landfills.",
+        "status": "APPROVED"
     },
     {
         "name": "eWaste 4 Good",
@@ -93,7 +104,8 @@
         "phone": "(310) 446-1770",
         "latitude": 34.04872,
         "longitude": -118.34413,
-        "description": "Provides e-waste collection services with a focus on giving back to the community through charitable recycling programs."
+        "description": "Provides e-waste collection services with a focus on giving back to the community through charitable recycling programs.",
+        "status": "APPROVED"
     },
     {
         "name": "ECO-Cycle",
@@ -101,15 +113,17 @@
         "phone": "(303) 444-6634",
         "latitude": 40.01357,
         "longitude": -105.20415,
-        "description": "A long-standing eco-conscious recycling center offering services for e-waste disposal and sustainable recycling practices in Boulder."
+        "description": "A long-standing eco-conscious recycling center offering services for e-waste disposal and sustainable recycling practices in Boulder.",
+        "status": "APPROVED"
     },
-    {     
+    {
         "name": "The Green Initiative",
         "address": "2870 E 30th Ave, Denver, CO 80205",
         "phone": "(720) 722-0180",
         "latitude": 39.75934,
         "longitude": -104.95388,
-        "description": "An organization committed to promoting green practices, including responsible e-waste recycling and community education in Denver."
+        "description": "An organization committed to promoting green practices, including responsible e-waste recycling and community education in Denver.",
+        "status": "APPROVED"
     },
     {
         "name": "Sustainable Recycling",
@@ -117,7 +131,8 @@
         "phone": "(303) 964-2033",
         "latitude": 39.77159,
         "longitude": -105.00761,
-        "description": "Provides recycling solutions with a focus on environmental sustainability, accepting a variety of electronic devices for safe disposal."
+        "description": "Provides recycling solutions with a focus on environmental sustainability, accepting a variety of electronic devices for safe disposal.",
+        "status": "APPROVED"
     },
     {
         "name": "Recycling Center",
@@ -125,7 +140,8 @@
         "phone": "(303) 762-1340",
         "latitude": 39.65071,
         "longitude": -104.98742,
-        "description": "Offers services for recycling electronics and other materials, supporting the community in reducing waste and preserving the environment."
+        "description": "Offers services for recycling electronics and other materials, supporting the community in reducing waste and preserving the environment.",
+        "status": "APPROVED"
     },
     {
         "name": "Recycling for Charity",
@@ -133,7 +149,8 @@
         "phone": "(303) 690-1686",
         "latitude": 39.66206,
         "longitude": -104.86038,
-        "description": "Aims to make a positive impact by recycling electronics while supporting charitable causes through its programs."
+        "description": "Aims to make a positive impact by recycling electronics while supporting charitable causes through its programs.",
+        "status": "APPROVED"
     },
     {
         "name": "R3 Recycling",
@@ -141,7 +158,8 @@
         "phone": "(408) 288-2020",
         "latitude": 37.31814,
         "longitude": -121.86406,
-        "description": "A reliable provider of electronics recycling services, offering safe and eco-friendly solutions for businesses and residents."
+        "description": "A reliable provider of electronics recycling services, offering safe and eco-friendly solutions for businesses and residents.",
+        "status": "APPROVED"
     },
     {
         "name": "Global e-Waste Solutions",
@@ -149,7 +167,8 @@
         "phone": "(813) 975-0768",
         "latitude": 28.03088,
         "longitude": -82.45937,
-        "description": "Provides secure and compliant recycling solutions for electronic waste, helping to protect the environment in Tampa."
+        "description": "Provides secure and compliant recycling solutions for electronic waste, helping to protect the environment in Tampa.",
+        "status": "APPROVED"
     },
     {
         "name": "E-Waste Management",
@@ -157,7 +176,8 @@
         "phone": "(954) 755-6000",
         "latitude": 26.26109,
         "longitude": -80.25024,
-        "description": "Offers comprehensive e-waste recycling services, specializing in the safe disposal of electronics in Coral Springs."
+        "description": "Offers comprehensive e-waste recycling services, specializing in the safe disposal of electronics in Coral Springs.",
+        "status": "APPROVED"
     },
     {
         "name": "Goodwill Industries",
@@ -165,7 +185,8 @@
         "phone": "(805) 735-3340",
         "latitude": 34.65461,
         "longitude": -120.45784,
-        "description": "Accepts donations of electronics for recycling or repurposing, helping to reduce waste while supporting Goodwill's charitable initiatives."
+        "description": "Accepts donations of electronics for recycling or repurposing, helping to reduce waste while supporting Goodwill's charitable initiatives.",
+        "status": "APPROVED"
     },
     {
         "name": "Green Citizen",
@@ -173,7 +194,8 @@
         "phone": "(650) 793-7224",
         "latitude": 37.54837,
         "longitude": -122.31019,
-        "description": "Focuses on promoting green living and provides easy, responsible recycling for electronics in the San Mateo area."
+        "description": "Focuses on promoting green living and provides easy, responsible recycling for electronics in the San Mateo area.",
+        "status": "APPROVED"
     },
     {
         "name": "Eco-Cycle",
@@ -181,7 +203,8 @@
         "phone": "(303) 444-6634",
         "latitude": 40.01357,
         "longitude": -105.20415,
-        "description": "Boulder’s leading recycling center for electronic waste, providing solutions that benefit both the community and the environment."
+        "description": "Boulder’s leading recycling center for electronic waste, providing solutions that benefit both the community and the environment.",
+        "status": "APPROVED"
     },
     {
         "name": "All Green Electronics Recycling",
@@ -189,7 +212,8 @@
         "phone": "(800) 780-0347",
         "latitude": 34.30857,
         "longitude": -118.47548,
-        "description": "Offers secure data destruction and electronics recycling services for businesses and consumers."
+        "description": "Offers secure data destruction and electronics recycling services for businesses and consumers.",
+        "status": "APPROVED"
     },
     {
         "name": "ERI (Electronic Recyclers International)",
@@ -197,7 +221,8 @@
         "phone": "(559) 442-3969",
         "latitude": 36.85042,
         "longitude": -119.80877,
-        "description": "Specializes in e-waste recycling, with a focus on sustainable and secure disposal."
+        "description": "Specializes in e-waste recycling, with a focus on sustainable and secure disposal.",
+        "status": "APPROVED"
     },
     {
         "name": "Tech Dump",
@@ -205,7 +230,8 @@
         "phone": "(763) 432-3117",
         "latitude": 44.96714,
         "longitude": -93.18878,
-        "description": "Provides affordable electronics recycling and refurbishing while creating job opportunities."
+        "description": "Provides affordable electronics recycling and refurbishing while creating job opportunities.",
+        "status": "APPROVED"
     },
     {
         "name": "Sims Recycling Solutions",
@@ -213,7 +239,8 @@
         "phone": "(630) 231-6060",
         "latitude": 41.90166,
         "longitude": -88.23465,
-        "description": "Global leader in e-waste recycling, offering a range of services including secure data destruction."
+        "description": "Global leader in e-waste recycling, offering a range of services including secure data destruction.",
+        "status": "APPROVED"
     },
     {
         "name": "Best Buy Recycling Center",
@@ -221,7 +248,8 @@
         "phone": "(920) 497-8560",
         "latitude": 44.48151,
         "longitude": -88.06934,
-        "description": "Accepts most electronics and large appliances for recycling."
+        "description": "Accepts most electronics and large appliances for recycling.",
+        "status": "APPROVED"
     },
     {
         "name": "Goodwill Electronics Store",
@@ -229,7 +257,8 @@
         "phone": "(714) 363-0500",
         "latitude": 33.82044,
         "longitude": -117.8374,
-        "description": "Accepts electronics for recycling and resale, promoting environmentally friendly practices."
+        "description": "Accepts electronics for recycling and resale, promoting environmentally friendly practices.",
+        "status": "APPROVED"
     },
     {
         "name": "e-End",
@@ -237,7 +266,8 @@
         "phone": "(240) 529-1010",
         "latitude": 39.3495,
         "longitude": -77.41107,
-        "description": "Provides IT asset disposition and secure data destruction services."
+        "description": "Provides IT asset disposition and secure data destruction services.",
+        "status": "APPROVED"
     },
     {
         "name": "Computer Recycling Center",
@@ -245,7 +275,8 @@
         "phone": "(408) 988-6351",
         "latitude": 37.35967,
         "longitude": -121.94554,
-        "description": "A non-profit organization that refurbishes and recycles old computers and electronics."
+        "description": "A non-profit organization that refurbishes and recycles old computers and electronics.",
+        "status": "APPROVED"
     },
     {
         "name": "Recycle Technologies",
@@ -253,7 +284,8 @@
         "phone": "(800) 969-5166",
         "latitude": 44.93372,
         "longitude": -93.35862,
-        "description": "Specializes in recycling electronics and shredding hard drives for secure data destruction."
+        "description": "Specializes in recycling electronics and shredding hard drives for secure data destruction.",
+        "status": "APPROVED"
     },
     {
         "name": "Staples Recycling Services",
@@ -261,6 +293,7 @@
         "phone": "(701) 255-6377",
         "latitude": 46.82373,
         "longitude": -100.77218,
-        "description": "Provides electronics recycling, including small items like batteries and larger office equipment."
+        "description": "Provides electronics recycling, including small items like batteries and larger office equipment.",
+        "status": "APPROVED"
     }
 ]
