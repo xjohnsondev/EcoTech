@@ -1,0 +1,27 @@
+.admin-centers-display {
+    background-color: #DBE2EF;
+    min-height: 100vh;
+    font-family: 'Poppins';
+    padding-bottom: 50px;
+}
+
+.btn-group {
+    margin: 30px auto;
+}
+
+.centers-table {
+    /* margin-top: 50px; */
+}
+
+.centers-content-row {}
+
+.centers-content-row td {
+    vertical-align: middle;
+    font-size: .9rem;
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}

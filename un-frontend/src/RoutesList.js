@@ -8,6 +8,7 @@ import About from "./About";
 import Footer from "./Footer";
 import AdminPortal from "./AdminPortal";
 import AdminUsers from "./AdminUsers";
+import CentersList from "./CentersList";
 
 const RoutesList = () => {
     return (
@@ -20,6 +21,7 @@ const RoutesList = () => {
                 {/* <Route exact path="/login-signup" element={<LoginSignup />} /> */}
                 <Route exact path="/admin-portal" element={<AdminPortal />} />
                 <Route exact path="/admin-users" element={<AdminUsers />} />
+                <Route exact path="/admin-centers" element={<CentersList />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             {/* <Footer /> */}

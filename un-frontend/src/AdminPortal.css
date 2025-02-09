@@ -1,5 +1,5 @@
 .admin-login-display {
-    height: 100vh;
+    height: calc(100vh - 55px);
     background-color: #DBE2EF;
     font-family: 'Poppins';
 }

@@ -46,10 +46,13 @@ public class SecurityConfig {
 
 
                         /// BE SURE TO REMOVE OTHER requestMatchers before launch
+
                         .requestMatchers("/get-centers").permitAll()
                         .requestMatchers("/add-centers").permitAll()
+                        .requestMatchers("/edit-center/{id}").permitAll()
                         .requestMatchers("/create-admin").permitAll()
                         .requestMatchers("/get-admin-users").permitAll()
+                        .requestMatchers("/approved-centers").permitAll()
                         .anyRequest().authenticated() // Require authentication for all other requests
                 )
                 .sessionManagement(session -> session

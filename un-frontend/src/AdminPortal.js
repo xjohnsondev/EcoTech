@@ -7,7 +7,7 @@ const AdminPortal = () => {
     const navItems = [
         { path: "/admin-users", label: "Admin Users" },
         { path: "/pending-centers", label: "Pending Centers" },
-        { path: "/approved-centers", label: "Approved Centers" },
+        { path: "/admin-centers", label: "Approved Centers" },
         { path: "/reported-centers", label: "Reported Centers" },
         { path: "/user-management", label: "User Management" },
         { path: "/analytics", label: "Analytics & Reports" },

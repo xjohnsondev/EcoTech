@@ -1,6 +1,6 @@
 .admin-users-display {
     background-color: #DBE2EF;
-    height: 100vh;
+    min-height: calc(100vh - 55px);
 }
 
 .admin-table {
