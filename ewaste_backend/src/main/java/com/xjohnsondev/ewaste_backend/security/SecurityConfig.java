@@ -2,6 +2,7 @@ package com.xjohnsondev.ewaste_backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,11 +50,11 @@ public class SecurityConfig {
 
                         .requestMatchers("/get-centers").permitAll()
                         .requestMatchers("/add-centers").permitAll()
-                        .requestMatchers("/edit-center/{id}").permitAll()
-                        .requestMatchers("/create-admin").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/edit-center/**").permitAll()                        .requestMatchers("/create-admin").permitAll()
                         .requestMatchers("/get-admin-users").permitAll()
                         .requestMatchers("/approved-centers").permitAll()
-                        .anyRequest().authenticated() // Require authentication for all other requests
+                        .anyRequest().permitAll()
+                        // Require authentication for all other requests
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Set session policy to stateless

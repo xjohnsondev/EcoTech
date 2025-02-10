@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -18,21 +19,6 @@ public class CenterController {
     public CenterController(CenterRepo centerRepo) {
         this.centerRepo = centerRepo;
     }
-
-    // Get all centers from the database
-//    @GetMapping("/get-centers")
-//    public ResponseEntity<List<Center>> getCenters(@RequestParam(required = false) String status) {
-//        List<Center> centers;
-//
-//        if (status == null || status.isEmpty()) {
-//            centers = centerRepo.findAllByOrderByIdAsc();
-//        } else {
-//            centers = centerRepo.findByStatusOrderByIdAsc(status);
-//        }
-//
-//        // Return queried centers (or an empty list with HTTP 200 if no centers)
-//        return ResponseEntity.ok(centers);
-//    }
 
     @GetMapping("/get-centers")
     public ResponseEntity<List<Center>> getAllCenters() {
@@ -69,18 +55,32 @@ public class CenterController {
 
     // Update an existing center by its ID
     @PutMapping("/edit-center/{id}")
-    public Center updateCenter(@RequestBody Center newCenter, @PathVariable Long id) {
+    public Center updateCenter(@RequestBody Map<String, Object> updates, @PathVariable Long id) {
         // Find the center by ID, if it exists
         return centerRepo.findById(id)
                 .map(center -> {
-                    // Update the center details with the new data
-                    center.setName(newCenter.getName());
-                    center.setAddress(newCenter.getAddress());
-                    center.setPhone(newCenter.getPhone());
-                    center.setLatitude(newCenter.getLatitude());
-                    center.setLongitude(newCenter.getLongitude());
-                    center.setDescription(newCenter.getDescription());
-                    center.setStatus(newCenter.getStatus());
+                    // Update fields if they are present in the request
+                    if (updates.containsKey("status")) {
+                        center.setStatus((String) updates.get("status"));
+                    }
+                    if (updates.containsKey("name")) {
+                        center.setName((String) updates.get("name"));
+                    }
+                    if (updates.containsKey("address")) {
+                        center.setAddress((String) updates.get("address"));
+                    }
+                    if (updates.containsKey("phone")) {
+                        center.setPhone((String) updates.get("phone"));
+                    }
+                    if (updates.containsKey("latitude")) {
+                        center.setLatitude((Double) updates.get("latitude"));
+                    }
+                    if (updates.containsKey("longitude")) {
+                        center.setLongitude((Double) updates.get("longitude"));
+                    }
+                    if (updates.containsKey("description")) {
+                        center.setDescription((String) updates.get("description"));
+                    }
                     // Save and return the updated center
                     return centerRepo.save(center);
                 })

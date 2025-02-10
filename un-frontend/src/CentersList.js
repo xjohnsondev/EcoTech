@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Pagination, Button, ButtonGroup } from 'react-bootstrap';
+import { Container, Table, Pagination, Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import './CentersList.css';
 
@@ -8,6 +8,13 @@ const CentersList = () => {
     const [filteredCenters, setFilteredCenters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const centersPerPage = 8;
+
+    // color code status buttons
+    const colorMap = {
+        "APPROVED": "success",
+        "PENDING": "warning",
+        "REJECTED": "danger",
+    };
 
     useEffect(() => {
         const fetchCenters = async () => {
@@ -47,6 +54,23 @@ const CentersList = () => {
         }
     };
 
+    const handleStatusChange = async (id, newStatus) => {
+        try {
+            // Send the status update request to the backend with the new status
+            const response = await axios.put(`http://localhost:8080/edit-center/${id}`, {
+                status: newStatus,
+            });
+            setCenters(prevCenters =>
+                prevCenters.map(center =>
+                    center.id === id ? { ...center, status: newStatus } : center
+                ))
+            handleTableFilter(newStatus);
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
+    }
+
+
     return (
         <div className='admin-centers-display'>
             <Container>
@@ -82,7 +106,24 @@ const CentersList = () => {
                                 <td>{center.latitude}</td>
                                 <td>{center.longitude}</td>
                                 <td>{center.description}</td>
-                                <td>{center.status}</td>
+                                <td>
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant={colorMap[center.status]}>
+                                            {center.status}
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            {center.status !== "APPROVED" && (
+                                                <Dropdown.Item onClick={() => handleStatusChange(center.id, "APPROVED")}>APPROVED</Dropdown.Item>
+                                            )}
+                                            {center.status !== "PENDING" && (
+                                                <Dropdown.Item onClick={() => handleStatusChange(center.id, "PENDING")}>PENDING</Dropdown.Item>
+                                            )}
+                                            {center.status !== "REJECTED" && (
+                                                <Dropdown.Item onClick={() => handleStatusChange(center.id, "REJECTED")}>REJECTED</Dropdown.Item>
+                                            )}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
