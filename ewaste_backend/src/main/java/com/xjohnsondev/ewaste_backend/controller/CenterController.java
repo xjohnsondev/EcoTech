@@ -20,14 +20,28 @@ public class CenterController {
     }
 
     // Get all centers from the database
-    @GetMapping("/get-centers")
-    public ResponseEntity<List<Center>> getCenters(@RequestParam(required = false) String status) {
-        List<Center> centers;
+//    @GetMapping("/get-centers")
+//    public ResponseEntity<List<Center>> getCenters(@RequestParam(required = false) String status) {
+//        List<Center> centers;
+//
+//        if (status == null || status.isEmpty()) {
+//            centers = centerRepo.findAllByOrderByIdAsc();
+//        } else {
+//            centers = centerRepo.findByStatusOrderByIdAsc(status);
+//        }
+//
+//        // Return queried centers (or an empty list with HTTP 200 if no centers)
+//        return ResponseEntity.ok(centers);
+//    }
 
-        if (status == null || status.isEmpty()) {
-            centers = centerRepo.findAllByOrderByIdAsc();
-        } else {
-            centers = centerRepo.findByStatusOrderByIdAsc(status);
+    @GetMapping("/get-centers")
+    public ResponseEntity<List<Center>> getAllCenters() {
+        // Retrieve all centers from the database
+        List<Center> centers = centerRepo.findAllByOrderByIdAsc();
+
+        // If no centers are found, return HTTP status 204 No Content
+        if (centers.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No centers found");
         }
 
         // Return queried centers (or an empty list with HTTP 200 if no centers)

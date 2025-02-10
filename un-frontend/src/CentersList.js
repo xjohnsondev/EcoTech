@@ -5,29 +5,28 @@ import './CentersList.css';
 
 const CentersList = () => {
     const [centers, setCenters] = useState([]);
-    const [show, setShow] = useState("ALL");
+    const [filteredCenters, setFilteredCenters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const centersPerPage = 8;
 
     useEffect(() => {
         const fetchCenters = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/get-centers', {
-                    params: show ? { status: show } : {},
-                });
-                console.log(response.data);
+                const response = await axios.get('http://localhost:8080/get-centers');
+                // console.table(response.data);
                 setCenters(response.data);
+                setFilteredCenters(response.data); // initial render will default to show all centers
             } catch (error) {
                 console.error("Error fetching centers:", error);
             }
         };
         fetchCenters();
-    }, [show]);
+    }, []);
 
-    // Calculate the indices for the current page
+    // Calculate the indices for the current page based on filteredCenters
     const indexOfLastCenter = currentPage * centersPerPage;
     const indexOfFirstCenter = indexOfLastCenter - centersPerPage;
-    const currentCenters = centers.slice(indexOfFirstCenter, indexOfLastCenter);
+    const currentCenters = filteredCenters.slice(indexOfFirstCenter, indexOfLastCenter);
 
     // Handle page change
     const handlePageChange = (pageNumber) => {
@@ -35,12 +34,17 @@ const CentersList = () => {
     };
 
     // Calculate total pages
-    const totalPages = Math.ceil(centers.length / centersPerPage);
+    const totalPages = Math.ceil(filteredCenters.length / centersPerPage);
 
     // Filter centers shown
-    const handleTableFilter = (status) => {
-        setShow(status);
-        console.log(show);
+    const handleTableFilter = (stat) => {
+        if (stat === "ALL") {
+            setFilteredCenters(centers); // Show all centers
+        } else {
+            setFilteredCenters(centers.filter((center) => {
+                return center.status === stat;
+            }));
+        }
     };
 
     return (
