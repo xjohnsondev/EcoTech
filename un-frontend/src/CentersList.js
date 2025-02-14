@@ -60,10 +60,13 @@ const CentersList = () => {
             const response = await axios.put(`http://localhost:8080/edit-center/${id}`, {
                 status: newStatus,
             });
+            // Reflect new status in frontend
             setCenters(prevCenters =>
                 prevCenters.map(center =>
                     center.id === id ? { ...center, status: newStatus } : center
                 ))
+                
+            // Show table with new update
             handleTableFilter(newStatus);
         } catch (error) {
             console.error('Error updating status:', error);

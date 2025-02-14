@@ -13,7 +13,7 @@ const Navigation = () => {
             <Nav.Link href="/add-center">Add Center</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href='/'>User</Nav.Link>
+            <Nav.Link href='/admin-portal'>User</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

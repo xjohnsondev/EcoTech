@@ -17,7 +17,7 @@ const Map = () => {
         // Fetch all recycling centers from database
         const fetchCenters = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/getCenters");
+                const response = await axios.get("http://localhost:8080/get-centers");
                 console.log(response.data);
                 setCenters(response.data);
             } catch (error) {

@@ -4,8 +4,9 @@
     font-family: 'Poppins';
     background-color: #DBE2EF;
     position: relative;
-    text-align: left;
+    text-align: left;    
 }
+
 .flex-cont {
     display: flex;
     flex-grow: 1;
@@ -15,7 +16,7 @@
     flex-grow: 1;
     padding-top: 60px;
     margin-left: 10px;
-    height: calc(100vh - 55px);
+    height: calc(100% - 55px);
 }
 
 .ac-form-container h1 {
@@ -27,7 +28,7 @@
 .style-block {
     background-color: #112D4E;
     width: 300px;
-    height: calc(100vh - 55px);
+    height: 100dvh;
     position: relative;
     left: 12px;
     margin-left: 20px;
@@ -49,7 +50,7 @@
     background-color: #3F72AF;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 950px) {
     .style-block {
         display: none;
     }

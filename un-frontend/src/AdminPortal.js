@@ -6,12 +6,9 @@ import './AdminPortal.css';
 const AdminPortal = () => {
     const navItems = [
         { path: "/admin-users", label: "Admin Users" },
-        { path: "/pending-centers", label: "Pending Centers" },
-        { path: "/admin-centers", label: "Approved Centers" },
-        { path: "/reported-centers", label: "Reported Centers" },
-        { path: "/user-management", label: "User Management" },
-        { path: "/analytics", label: "Analytics & Reports" },
-        { path: "/settings", label: "Settings" },
+        { path: "/admin-centers", label: "Recycling Centers" },
+        { path: "/admin-analytics", label: "Analytics & Reports" },
+        { path: "/admin-settings", label: "Settings" },
         { path: "/logout", label: "Logout", className: "logout-link" }
     ];
 

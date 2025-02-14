@@ -4,10 +4,14 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import Footer from "./Footer";
 import UseGetLatLong from './hooks/UseGetLatLng';
 import statesConfig from './config/statesConfig.json';
+import axios from 'axios';
+import { useAsyncError } from 'react-router-dom';
 
 const AddCenter = () => {
-    const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null })
     const [isZipValid, setIsZipValid] = useState(true);
+    const [error, setError] = useState(null);
+    const [phoneError, setPhoneError] = useState(null);
+    const [zipError, setZipError] = useState(null);
     const states = statesConfig.statesOptions;
 
     const businessNameRef = useRef();
@@ -18,33 +22,82 @@ const AddCenter = () => {
     const stateRef = useRef();
     const zipCodeRef = useRef();
 
+    const validatePhoneNumber = (phoneNumber) => {
+        // Validate phone number is 10 digits
+        const newPhone = phoneNumber.replace(/\D/g, "");
+        console.log(newPhone);
+        if (newPhone.length !== 10) {
+            setPhoneError("Phone number must be 10 digits.");
+            return null;
+        }
+        setPhoneError(null);
+        return `(${newPhone.slice(0, 3)}) ${newPhone.slice(3, 6)}-${newPhone.slice(6)}`;
+    }
+
+    const validateZipcode = (zipCode) => {
+        if (!/^\d{5}$/.test(zipCode)) {
+            setIsZipValid(false);
+            setZipError("Zip code must be 5 digits.");
+            return false;
+        }
+        setIsZipValid(true);
+        setZipError(null);
+        return true;
+    };
+
     const handleCenterSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
+
+
 
         // Gather location details from form
-        const businessName = businessNameRef.current.value;
-        const businessContact = businessContactRef.current.value;
-        const businessDescription = businessDescriptionRef.current.value;
-        const street = streetNameRef.current.value;
-        const city = cityRef.current.value === "District of Columbia" ? "D.C." : cityRef.current.value;
-        const state = stateRef.current.value;
-        const zipCode = zipCodeRef.current.value;
-
-        // Validate zipcode is 5 digit number
-        if (/^\d{5}$/.test(zipCode)) {
-            setIsZipValid(true)
-        } else {
-            setIsZipValid(false)
-        }
+        const businessName = businessNameRef.current.value.trim();
+        const businessContact = businessContactRef.current.value.trim();
+        const businessDescription = businessDescriptionRef.current.value.trim();
+        const street = streetNameRef.current.value.trim();
+        const city = cityRef.current.value === "District of Columbia" ? "Washington D.C." : cityRef.current.value.trim();
+        const state = city === "Distict of Columbia" ? "" : stateRef.current.value;
+        const zipCode = zipCodeRef.current.value.trim();
 
         const address = (street + ", " + city + ", " + state + " " + zipCode).toUpperCase();
 
-        // Geolocate entry for map placement
-        const { latitude, longitude } = await UseGetLatLong(address);
-        setCoordinates({ latitude, longitude });
+        // Validate phone number
+        const formattedPhone = validatePhoneNumber(businessContact);
+        if (!formattedPhone) {
+            setError("Please enter a valid 10-digit phone number.");
+            return;  // Prevent form submission
+        }
+    
+        // Validate ZIP code
+        if (!validateZipcode(zipCode)) {
+            setError("Please enter a valid ZIP code.");
+            return;  // Prevent form submission
+        }
 
-        // Send data to database here
+        try {
+            // Geolocate entry for map placement
+            const { latitude, longitude } = await UseGetLatLong(address);
+
+            // Send new center to database
+            await axios.post(`http://localhost:8080/add-centers`, [
+                {
+                    name: businessName,
+                    address: address,
+                    phone: formattedPhone,
+                    latitude: latitude,
+                    longitude: longitude,
+                    description: businessDescription,
+                    status: "PENDING",
+                }
+            ]);
+        } catch (error) {
+            console.error("Error submitting center:", error);
+            setError("An error occurred while submitting the center. Please try again.");
+        }
     };
+
+
 
     return (
         <Container fluid className='ac-body'>
@@ -63,7 +116,11 @@ const AddCenter = () => {
                             <Col md={5}>
                                 <Form.Group controlId='formBusinessContact'>
                                     <Form.Label>Phone Number</Form.Label>
-                                    <Form.Control type='text' placeholder='' className='ac-input' ref={businessContactRef} />
+                                    <Form.Control type='text' isInvalid={!!phoneError}
+                                        placeholder='' className='ac-input' ref={businessContactRef} />
+                                    <Form.Control.Feedback type='invalid'>
+                                        {phoneError}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -98,10 +155,8 @@ const AddCenter = () => {
                             <Col md={4}>
                                 <Form.Group controlId='formState'>
                                     <Form.Label>State *</Form.Label>
-                                    <Form.Select className='ac-input' ref={stateRef} required>
-                                        <option value="" disabled>
-                                            SELECT
-                                        </option>
+                                    <Form.Select className='ac-input' ref={stateRef} defaultValue="" required >
+                                        <option value="" disabled />
                                         {states.map((state, index) => (
                                             <option key={index} value={state}>
                                                 {state}
@@ -120,12 +175,7 @@ const AddCenter = () => {
                                         isInvalid={!isZipValid}
                                         required />
                                     <Form.Control.Feedback type='invalid'>
-                                        <p style={{
-                                            textAlign: 'left',
-                                            paddingLeft: '5px'
-                                        }}>
-                                            Please enter a valid zipcode
-                                        </p>
+                                        {zipError}
                                     </Form.Control.Feedback>
 
                                 </Form.Group>
@@ -138,9 +188,7 @@ const AddCenter = () => {
                 </Container>
                 <div className='style-block'></div>
             </div>
-            <div>
-                <Footer />
-            </div>
+            <Footer />
         </Container>
     );
 }

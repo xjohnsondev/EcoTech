@@ -101,12 +101,4 @@ public class CenterController {
         // Return a success message indicating that the center was deleted
         return "Center with id " + id + " has been deleted";
     }
-
-    // Get all centers with the status "APPROVED"
-    @GetMapping("/approved-centers")
-    public List<Center> getApprovedCenters() {
-        // Retrieve and return centers that have the status "APPROVED" sorted by ID in ASC order
-        return centerRepo.findByStatusOrderByIdAsc("APPROVED");
-    }
-
 }
