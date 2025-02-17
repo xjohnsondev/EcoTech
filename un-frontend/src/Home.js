@@ -30,13 +30,12 @@ const Home = () => {
                 <div className="shorts-container">
                     {shortsURLs.map((short, index) => (
                         <iframe 
-                        key= {index}
+                        key={index}
                         className="short"
                         width="220" 
                         height="391" 
                         src={short}
                         title="YouTube video player" 
-                        frameBorder="0" 
                         >
                       </iframe>
                     ))}
