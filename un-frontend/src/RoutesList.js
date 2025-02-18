@@ -5,10 +5,10 @@ import NotFound from "./NotFound";
 import AddCenter from "./AddCenter";
 import Home from "./Home";
 import About from "./About";
-import Footer from "./Footer";
 import AdminPortal from "./AdminPortal";
 import AdminUsers from "./AdminUsers";
 import CentersList from "./CentersList";
+import Terms from "./Terms";
 
 const RoutesList = () => {
     return (
@@ -22,6 +22,7 @@ const RoutesList = () => {
                 <Route exact path="/admin-portal" element={<AdminPortal />} />
                 <Route exact path="/admin-users" element={<AdminUsers />} />
                 <Route exact path="/admin-centers" element={<CentersList />} />
+                <Route exact path="/terms" element={<Terms />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             {/* <Footer /> */}

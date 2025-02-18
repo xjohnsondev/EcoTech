@@ -1,0 +1,36 @@
+.terms-container {
+    height: calc(100dvw - 55px);
+    background-color: #DBE2EF;
+    font-family: 'Poppins';
+}
+
+.terms-container h1 {
+    padding-top: 30px;
+    margin-bottom: 40px;
+}
+
+.terms-container h4 {
+    text-align: left;
+    padding: 0 175px;
+}
+
+.terms-container p {
+    text-align: left;
+    padding: 0 175px 20px 175px;
+}
+
+.restrictions-list {
+    padding: 0 175px 15px 175px;
+    margin-top: -20px;
+    list-style: none;
+}
+
+.restrictions-list li {
+    text-align: left;
+    padding-bottom: 5px;
+}
+
+.restrictions-list li::before {
+    content: "➾";
+    padding-right: 10px;
+}
