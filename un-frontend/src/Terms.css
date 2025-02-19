@@ -1,5 +1,6 @@
 .terms-container {
-    height: calc(100dvw - 55px);
+    height: calc(100% - 55px);
+    padding-bottom: 10px;
     background-color: #DBE2EF;
     font-family: 'Poppins';
 }
