@@ -1,7 +1,8 @@
 .footer-div {
-    width: 100dvw;
+    width: inherit;
+    height: 150px;
     background-color: #DBE2EF;
-    padding: 20px 0;
+    padding: 70px 0 10px 0;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -12,6 +13,7 @@
 
 .footer-header {
     position: relative;
+    margin-top: 50px;
 }
 
 .footer-link-list {
@@ -19,6 +21,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
+    margin-top: 50px;
 }
 
 .footer-notes p {
@@ -33,6 +36,16 @@
 
 @media (max-width: 900px) {
     .footer-div {
-        flex-direction: column;
+        flex-direction: column; 
+    }
+
+    .footer-header {
+        position: absolute;
+        bottom: 40px;
+    }
+
+    .footer-link-list {
+        position: absolute;
+        bottom: 0;
     }
 }

@@ -5,6 +5,7 @@
     background-color: #DBE2EF;
     position: relative;
     text-align: left;    
+    min-height: 100dvh;
 }
 
 .flex-cont {
@@ -28,7 +29,7 @@
 .style-block {
     background-color: #112D4E;
     width: 300px;
-    height: 100dvh;
+    height: calc(100dvh - 155px);
     position: relative;
     left: 12px;
     margin-left: 20px;
@@ -53,5 +54,17 @@
 @media (max-width: 950px) {
     .style-block {
         display: none;
+    }
+   
+    .ac-form-container {
+        max-width: 100%; 
+    }
+}
+
+@media (max-width: 767px) {
+    .name-input,
+    .city-input,
+    .state-input {
+        margin-bottom: 15px;
     }
 }

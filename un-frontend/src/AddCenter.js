@@ -1,6 +1,6 @@
 import './AddCenter.css';
 import { useState, useRef } from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, FloatingLabel, FormControl } from 'react-bootstrap';
 import Footer from "./Footer";
 import UseGetLatLong from './hooks/UseGetLatLng';
 import statesConfig from './config/statesConfig.json';
@@ -8,8 +8,9 @@ import axios from 'axios';
 import { useAsyncError } from 'react-router-dom';
 
 const AddCenter = () => {
+    const [validated, setValidated] = useState(false);
     const [isZipValid, setIsZipValid] = useState(true);
-    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
     const [phoneError, setPhoneError] = useState(null);
     const [zipError, setZipError] = useState(null);
     const states = statesConfig.statesOptions;
@@ -47,9 +48,7 @@ const AddCenter = () => {
 
     const handleCenterSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
-
-
+        setErrors({});
 
         // Gather location details from form
         const businessName = businessNameRef.current.value.trim();
@@ -62,18 +61,27 @@ const AddCenter = () => {
 
         const address = (street + ", " + city + ", " + state + " " + zipCode).toUpperCase();
 
+
+        // Validation code
+        if (!businessName) setErrors({ ...errors, businessNameError: "Please enter a Business Name" });
+        if (!street) setErrors({ ...errors, streetError: "Please enter a Street Name" });
+        if (!city) setErrors({ ...errors, cityError: "Please enter a city" });
+        if (!state) setErrors({ ...errors, stateError: "Please select a State" });
+
         // Validate phone number
         const formattedPhone = validatePhoneNumber(businessContact);
         if (!formattedPhone) {
-            setError("Please enter a valid 10-digit phone number.");
+            setErrors({ ...errors, phoneError: "Please enter a valid 10-digit phone number." });
             return;  // Prevent form submission
         }
-    
+
         // Validate ZIP code
         if (!validateZipcode(zipCode)) {
-            setError("Please enter a valid ZIP code.");
+            setErrors({ ...errors, zipError: "Please enter a valid ZIP code." });
             return;  // Prevent form submission
         }
+
+        /////////
 
         try {
             // Geolocate entry for map placement
@@ -93,7 +101,7 @@ const AddCenter = () => {
             ]);
         } catch (error) {
             console.error("Error submitting center:", error);
-            setError("An error occurred while submitting the center. Please try again.");
+            setErrors("An error occurred while submitting the center. Please try again.");
         }
     };
 
@@ -105,22 +113,38 @@ const AddCenter = () => {
                 <Container className='ac-form-container'>
                     <h1>Register a Recycling Center</h1>
 
-                    <Form onSubmit={handleCenterSubmit} className='ac-form'>
+                    <Form noValidate validated={validated} onSubmit={handleCenterSubmit} className='ac-form'>
                         <Row className='mb-3'>
                             <Col md={7}>
                                 <Form.Group controlId='formBusinessName'>
-                                    <Form.Label>Business Name *</Form.Label>
-                                    <Form.Control type='text' placeholder='' className='ac-input' ref={businessNameRef} required />
+                                    <FloatingLabel label="Business Name *">
+                                        <FormControl
+                                            type='text'
+                                            placeholder='Business Name *'
+                                            className='ac-input name-input'
+                                            ref={businessNameRef}
+                                            required
+                                        />
+                                        <Form.Control.Feedback type='invalid'>
+                                            {errors.businessNameError}
+                                        </Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </Form.Group>
                             </Col>
                             <Col md={5}>
                                 <Form.Group controlId='formBusinessContact'>
-                                    <Form.Label>Phone Number</Form.Label>
-                                    <Form.Control type='text' isInvalid={!!phoneError}
-                                        placeholder='' className='ac-input' ref={businessContactRef} />
-                                    <Form.Control.Feedback type='invalid'>
-                                        {phoneError}
-                                    </Form.Control.Feedback>
+                                    <FloatingLabel label="Phone Number">
+                                        <FormControl
+                                            type='text'
+                                            isInvalid={!!errors.phoneError}
+                                            placeholder='Phone Number'
+                                            className='ac-input'
+                                            ref={businessContactRef}
+                                        />
+                                        <Form.Control.Feedback type='invalid'>
+                                            {errors.phoneError}
+                                        </Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -128,11 +152,18 @@ const AddCenter = () => {
                         <Row className='mb-3'>
                             <Col xs={12}>
                                 <Form.Group controlId='formBusinessDescription'>
-                                    <Form.Label>Description</Form.Label>
-                                    <Form.Control as='textarea' rows={3} className='ac-input' ref={businessDescriptionRef} />
-                                    <Form.Text className='text-muted'>
-                                        Tell us about your business
-                                    </Form.Text>
+                                    <FloatingLabel label="Description">
+                                        <FormControl
+                                            as='textarea'
+                                            style={{ height: '75px' }}
+                                            placeholder='Description'
+                                            className='ac-input'
+                                            ref={businessDescriptionRef}
+                                        />
+                                        <Form.Text className='text-muted'>
+                                            Tell us about your business
+                                        </Form.Text>
+                                    </FloatingLabel>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -140,44 +171,76 @@ const AddCenter = () => {
                         <Row className='mb-3'>
                             <Col xs={12}>
                                 <Form.Group controlId='formStreetName'>
-                                    <Form.Label>Street *</Form.Label>
-                                    <Form.Control type='text' className='ac-input' ref={streetNameRef} required />
+                                    <FloatingLabel label="Street *">
+                                        <FormControl
+                                            type='text'
+                                            className='ac-input'
+                                            isInvalid={!!errors.streetError}
+                                            placeholder='Street *'
+                                            ref={streetNameRef}
+                                            required />
+                                    </FloatingLabel>
+                                    <Form.Control.Feedback type='invalid'>
+                                        {errors.streetError}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row>
                             <Col md={5}>
                                 <Form.Group controlId='formCity'>
-                                    <Form.Label>City *</Form.Label>
-                                    <Form.Control type='text' className='ac-input' ref={cityRef} required />
+                                    <FloatingLabel label='City *'>
+                                        <Form.Control
+                                            className='ac-input city-input'
+                                            isInvalid={!!errors.cityError}
+                                            placeholder='City *'
+                                            ref={cityRef}
+                                            required
+                                        />
+                                    </FloatingLabel>
+                                    <Form.Control.Feedback type='invalid'>
+                                        {errors.cityError}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
                             <Col md={4}>
                                 <Form.Group controlId='formState'>
-                                    <Form.Label>State *</Form.Label>
-                                    <Form.Select className='ac-input' ref={stateRef} defaultValue="" required >
-                                        <option value="" disabled />
-                                        {states.map((state, index) => (
-                                            <option key={index} value={state}>
-                                                {state}
-                                            </option>
-                                        ))}
-                                    </Form.Select>
+                                    <FloatingLabel label='State *'>
+                                        <Form.Select
+                                            type='text'
+                                            className='ac-input state-input'
+                                            isInvalid={!!errors.stateError}
+                                            ref={stateRef}
+                                            defaultValue=""
+                                            required
+                                        >
+                                            <option value="" disabled />
+                                            {states.map((state, index) => (
+                                                <option key={index} value={state}>
+                                                    {state}
+                                                </option>
+                                            ))}
+                                        </Form.Select>
+                                    </FloatingLabel>
+                                    <Form.Control.Feedback type='invalid'>
+                                        {errors.stateError}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
                             <Col md={3}>
                                 <Form.Group controlId='formZipCode'>
-                                    <Form.Label>Zip *</Form.Label>
-                                    <Form.Control
-                                        type='text'
-                                        className='ac-input'
-                                        ref={zipCodeRef}
-                                        isInvalid={!isZipValid}
-                                        required />
-                                    <Form.Control.Feedback type='invalid'>
-                                        {zipError}
-                                    </Form.Control.Feedback>
-
+                                    <FloatingLabel label='Zip *'>
+                                        <Form.Control
+                                            type='text'
+                                            className='ac-input'
+                                            placeholder='City *'
+                                            ref={zipCodeRef}
+                                            isInvalid={!!errors.zipError}
+                                            required />
+                                        <Form.Control.Feedback type='invalid'>
+                                            {errors.zipError}
+                                        </Form.Control.Feedback>
+                                    </FloatingLabel>
                                 </Form.Group>
                             </Col>
                         </Row>
