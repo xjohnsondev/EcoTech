@@ -62,7 +62,7 @@ const AddCenter = () => {
         const address = (street + ", " + city + ", " + state + " " + zipCode).toUpperCase();
 
 
-        // Validation code
+        /////// Validation code
         if (!businessName) setErrors({ ...errors, businessNameError: "Please enter a Business Name" });
         if (!street) setErrors({ ...errors, streetError: "Please enter a Street Name" });
         if (!city) setErrors({ ...errors, cityError: "Please enter a city" });
@@ -80,7 +80,6 @@ const AddCenter = () => {
             setErrors({ ...errors, zipError: "Please enter a valid ZIP code." });
             return;  // Prevent form submission
         }
-
         /////////
 
         try {
@@ -114,6 +113,9 @@ const AddCenter = () => {
                     <h1>Register a Recycling Center</h1>
 
                     <Form noValidate validated={validated} onSubmit={handleCenterSubmit} className='ac-form'>
+                        <Form.Text className='text-muted'>
+                            * Denotes required
+                        </Form.Text>
                         <Row className='mb-3'>
                             <Col md={7}>
                                 <Form.Group controlId='formBusinessName'>

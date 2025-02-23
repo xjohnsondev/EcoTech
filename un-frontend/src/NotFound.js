@@ -16,15 +16,15 @@ const NotFoundPage = () => {
                 </Col>
             </Row>
             <Row className="nf-actions mb-3">
-                <Col className='my-2'>
+                <Col className='buttons my-2'>
                     <Button variant="success" as={Link} to="/" className="mx-2">
                         🏡 Take me home
                     </Button>
                     <Button variant="danger" as={Link} to="/" className="mx-2">
                         🆘 Get help
                     </Button>
-                    <Button variant="info" as={Link} to="/" className="mx-2">
-                        ♻️ Learn about recycling
+                    <Button variant="info" as={Link} to="/about" className="mx-2">
+                        ♻️ Learn about us
                     </Button>
                 </Col>
             </Row>

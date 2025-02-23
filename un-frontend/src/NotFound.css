@@ -50,3 +50,36 @@
     color: #666;
     max-width: 500px;
 }
+
+@media (max-width: 860px) {
+    .nf-title {
+        font-size: 1.75rem;
+    }
+
+    .nf-message {
+        font-size: 1rem;
+        padding: 0 30px;
+    }
+}
+
+
+@media (max-width: 540px) {
+    .nf-title {
+        font-size: 1.5rem;
+    }
+
+    .nf-message {
+        font-size: 1rem;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .nf-note {
+        margin-top: 25px;
+        font-size: .8rem;
+    }
+}

@@ -22,14 +22,14 @@
 
 .ac-form-container h1 {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 60px;
     color: #112D4E;
 }
 
 .style-block {
     background-color: #112D4E;
     width: 300px;
-    height: calc(100dvh - 155px);
+    height: calc(100dvh - 55px);
     position: relative;
     left: 12px;
     margin-left: 20px;
@@ -68,3 +68,4 @@
         margin-bottom: 15px;
     }
 }
+
