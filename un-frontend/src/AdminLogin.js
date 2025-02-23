@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import './AdminLogin.css';
 import { Form, Button, FloatingLabel, FormControl } from 'react-bootstrap';
+import axios from 'axios';
+import { useAuth } from "./AuthContext";
 
 const AdminLogin = () => {
     const [validated, setValidated] = useState(false);
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [errors, setErrors] = useState({});
+    const { setAuthToken } = useAuth(); // Get setAuthToken from AuthContext
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
 
@@ -29,6 +32,16 @@ const AdminLogin = () => {
         // If no errors, proceed with submission
         if (Object.keys(newErrors).length === 0) {
             console.log('Form submitted:', loginData);
+            try {
+                const response = await axios.post(`http://localhost:8080/login`, {
+                    username: loginData.username,
+                    password: loginData.password,
+                });
+                console.log('Login successful:', response.data);
+                setAuthToken(response.data.authToken);  // Store token in context
+            } catch (error) {
+                console.error('Error during login:', error.response ? error.response.data : error.message);
+            }
         }
     };
 

@@ -51,8 +51,7 @@ public class Admin {
     }
 
     public void setPassword(String password) {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
+        this.password = password;
     }
 
     public boolean checkPassword(String rawPassword) {

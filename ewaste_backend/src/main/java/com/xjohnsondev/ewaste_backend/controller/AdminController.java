@@ -9,11 +9,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -23,42 +25,66 @@ public class AdminController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     public AdminController(AdminRepo adminRepo,
                            AuthenticationManager authenticationManager,
                            JwtUtil jwtUtil,
-                           UserDetailsService userDetailsService) {
+                           UserDetailsService userDetailsService,
+                           PasswordEncoder passwordEncoder) {
         this.adminRepo = adminRepo;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Admin admin) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
+    public ResponseEntity<?> login(@RequestBody Admin admin) {
+        // Print received username and password
+        System.out.println("Attempting login for: " + admin.getUsername());
+        System.out.println("Password sent: " + admin.getPassword());
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(admin.getUsername());
-        final String token = jwtUtil.generateToken(userDetails.getUsername());
+        try {
+            // Authenticate the user
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
 
-        return "Bearer " + token;
+            System.out.println("Authentication successful!");
+
+            // Load user details after authentication
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(admin.getUsername());
+
+            System.out.println("User details gathered");
+
+            // Generate JWT token
+            final String token = jwtUtil.generateToken(userDetails.getUsername());
+            System.out.println("Generated JWT token: " + token);
+
+            // Return token in response
+            Map<String, String> response = new HashMap<>();
+            response.put("authToken", token);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Log the exception to get more insights
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
     }
 
     @PostMapping("/create-admin")
     public ResponseEntity<String> createAdmin(@RequestBody Admin admin) {
         try {
-            // Hash the admin password using BCryptPasswordEncoder before saving it
-            String hashedPassword = new BCryptPasswordEncoder().encode(admin.getPassword());
-            admin.setPassword(hashedPassword); // Set the hashed password on the admin object
+            // Hash the password using PasswordEncoder before saving
+            String hashedPassword = passwordEncoder.encode(admin.getPassword());
+            admin.setPassword(hashedPassword);
 
-            // Save the admin object to the repository
+            // Save admin with hashed password
             adminRepo.save(admin);
 
-            // Return a response indicating that the admin was created successfully
             return ResponseEntity.status(HttpStatus.CREATED).body("Admin created successfully");
         } catch (Exception e) {
-            // If an error occurs, return a response with HTTP status 500 (Internal Server Error) and the error message
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating admin: " + e.getMessage());
         }
     }
