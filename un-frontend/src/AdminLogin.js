@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import './AdminLogin.css';
-import { Form, Button, FloatingLabel, FormControl } from 'react-bootstrap';
+import { Form, Button, FloatingLabel, FormControl, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
     const [validated, setValidated] = useState(false);
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [errors, setErrors] = useState({});
     const { setAuthToken } = useAuth(); // Get setAuthToken from AuthContext
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,8 +41,10 @@ const AdminLogin = () => {
                 });
                 console.log('Login successful:', response.data);
                 setAuthToken(response.data.authToken);  // Store token in context
+                navigate("/admin-portal");
             } catch (error) {
-                console.error('Error during login:', error.response ? error.response.data : error.message);
+                // console.error('Error during login:', error.response ? error.response.data : error.message);
+                setErrors({...errors, invalid: error.response.data});
             }
         }
     };
@@ -84,6 +88,7 @@ const AdminLogin = () => {
                 </Form.Group>
 
                 <Button type="submit" className='admin-login-btn'>Submit</Button>
+                {errors.invalid && <Alert variant='danger' className='login-alert'>{errors.invalid}</Alert>}
             </Form>
         </div>
     );

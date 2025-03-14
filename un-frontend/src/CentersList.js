@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 import { Container, Table, Pagination, Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import './CentersList.css';
 
 const CentersList = () => {
     const { authToken } = useAuth();
+    const navigate = useNavigate();
     const [centers, setCenters] = useState([]);
     const [filteredCenters, setFilteredCenters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -18,28 +20,36 @@ const CentersList = () => {
         "REJECTED": "danger",
     };
 
+    // 🔥 Redirect to login if no authToken
+    useEffect(() => {
+        if (!authToken) {
+            // console.error("No authentication token found. Redirecting to login...");
+            navigate("/login");
+        }
+    }, [authToken, navigate]);
+
     useEffect(() => {
         const fetchCenters = async () => {
-            if (!authToken) {
-                console.error("No authentication token found. Redirecting to login...");
-                return;  // Stop request if no token is available
-            }
+            if (!authToken) return; // Stop request if no token is available
             try {
                 const response = await axios.get("http://localhost:8080/get-centers", {
                     headers: {
-                        // Attach token in request headers
-                        Authorization: `Bearer ${authToken}`, 
+                        // Attach token in request header
+                        Authorization: `${authToken}`,
                     },
-                });                
+                });
                 // console.table(response.data);
                 setCenters(response.data);
                 setFilteredCenters(response.data); // initial render will default to show all centers
             } catch (error) {
                 console.error("Error fetching centers:", error);
+                if (error.response?.status === 401) {
+                    navigate("/"); // Redirect to home if unauthorized
+                }
             }
         };
         fetchCenters();
-    }, []);
+    }, [authToken]);
 
     // Calculate the indices for the current page based on filteredCenters
     const indexOfLastCenter = currentPage * centersPerPage;
@@ -73,7 +83,7 @@ const CentersList = () => {
                 { status: newStatus },
                 {
                     headers: {
-                        Authorization: `Bearer ${authToken}`,  // Ensure "Bearer " prefix is added
+                        Authorization: `${authToken}`,
                     },
                 }
             );
@@ -82,11 +92,15 @@ const CentersList = () => {
                 prevCenters.map(center =>
                     center.id === id ? { ...center, status: newStatus } : center
                 ))
-                
+
             // Show table with new update
             handleTableFilter(newStatus);
+            
         } catch (error) {
             console.error('Error updating status:', error);
+            if (error.response?.status === 401) {
+                navigate("/"); // Redirect to home if unauthorized
+            }
         }
     }
 

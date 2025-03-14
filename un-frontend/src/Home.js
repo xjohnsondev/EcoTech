@@ -1,15 +1,40 @@
 import './Home.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Tabs, Tab, Image, Row, Col } from 'react-bootstrap';
 import Map from './Map';
 import Footer from './Footer';
 import RecyclingImage1 from './images/recycle-image1.gif'
 import RecyclingImage2 from './images/recycle-image2.jpg'
 import shortsConfig from "./config/shortsConfig.json";
+import axios from "axios";
 
 
 const Home = () => {
-    const shortsURLs = shortsConfig.shortsURLs;
+    const initialShorts = shortsConfig.shortsURLs;
+    const [validShorts, setValidShorts] = useState(initialShorts);
+
+    useEffect(() => {
+        // Validates each short can render before placing embedding into the page
+        const checkVideos = async () => {
+            const validatedShorts = [];
+
+            await Promise.all(initialShorts.map(async (url) => {
+                try {
+                    const videoId = url.split("/embed/")[1]?.split("?")[0]; // Extract video ID
+                    const response = await axios.get(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+                    
+                    if (response.status === 200) {
+                        validatedShorts.push(url);
+                    }
+                } catch (error) {
+                    console.warn(`Video unavailable: ${url}`);
+                }
+            }));
+            setValidShorts(validatedShorts);
+        };
+
+        checkVideos();
+    }, []);
 
     return (
         <div className="homepage">
@@ -27,20 +52,19 @@ const Home = () => {
             </div>
 
             <Container>
-                <div className="shorts-container">
-                    {shortsURLs.map((short, index) => (
-                        <iframe 
+            <div className="shorts-container">
+                {validShorts.map((short, index) => (
+                    <iframe 
                         key={index}
                         className="short"
                         width="220" 
                         height="391" 
                         src={short}
-                        title="YouTube video player" 
-                        >
-                      </iframe>
-                    ))}
-                </div>
-            </Container>
+                        title={`YouTube short ${index + 1}`} 
+                    />
+                ))}
+            </div>
+        </Container>
 
             <div className='content-row'>
                 <h2>EcoMap</h2>
