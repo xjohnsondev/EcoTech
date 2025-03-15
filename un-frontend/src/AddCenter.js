@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import UseGetLatLong from './hooks/UseGetLatLng';
 import statesConfig from './config/statesConfig.json';
 import axios from 'axios';
-import { useAsyncError } from 'react-router-dom';
 
 const AddCenter = () => {
     const [validated, setValidated] = useState(false);
@@ -113,7 +112,7 @@ const AddCenter = () => {
                     <h1>Register a Recycling Center</h1>
 
                     <Form noValidate validated={validated} onSubmit={handleCenterSubmit} className='ac-form'>
-                        <Form.Text className='text-muted'>
+                        <Form.Text className='text-muted mx-1'>
                             * Denotes required
                         </Form.Text>
                         <Row className='mb-3'>
@@ -162,8 +161,8 @@ const AddCenter = () => {
                                             className='ac-input'
                                             ref={businessDescriptionRef}
                                         />
-                                        <Form.Text className='text-muted'>
-                                            Tell us about your business
+                                        <Form.Text className='text-muted mx-1'>
+                                            Tell us about the business
                                         </Form.Text>
                                     </FloatingLabel>
                                 </Form.Group>
