@@ -14,7 +14,7 @@ EcoTech began as a United Nations NGO Hackathon project with the mission of prom
 
 ## Screenshots
 
-![EcoTech Screenshot](./public/assets/screenshot.png)
+![EcoTech Screenshot](./un-frontend/public/assets/screenshot.png)
 
 
 ## Tech Stack
