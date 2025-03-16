@@ -43,8 +43,8 @@ const Terms = () => {
             {/* <h4>User Accounts</h4>
             <p>To access certain features, you may need to create an account. You are responsible for maintaining the confidentiality of your account information.</p> */}
 
-            {/* <h4>Privacy Policy</h4>
-            <p>Your use of EcoTech is also governed by our Privacy Policy, which outlines how we collect and handle your data.</p> */}
+            <h4>Privacy Policy</h4>
+            <p>Your use of EcoTech is also governed by our Privacy Policy, which outlines how we collect and handle your data.</p>
 
             <h4>Limitation of Liability</h4>
             <p>EcoTech is not responsible for any direct, indirect, incidental, or consequential damages resulting from your use of our Services.

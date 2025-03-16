@@ -1,0 +1,38 @@
+.privacy-container {
+    height: calc(100% - 55px);
+    padding-bottom: 10px;
+    background-color: #DBE2EF;
+    font-family: 'Poppins';
+}
+
+.privacy-container h1 {
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.privacy-content {
+    text-align: left;
+    padding: 0 150px 20px 150px;
+}
+
+.privacy-content h4 {
+    padding: 5px 0;
+}
+
+.privacy-content p {
+    margin-bottom: -1px;
+}
+
+.privacy-content div {
+    padding-bottom: 20px;
+}
+
+.privacy-list {
+    margin-bottom: -5px;
+    list-style: none;
+}
+
+.privacy-list li::before {
+    content: "➾";
+    padding-right: 10px;
+}

@@ -9,6 +9,7 @@ import AdminPortal from "./AdminPortal";
 import AdminUsers from "./AdminUsers";
 import CentersList from "./CentersList";
 import Terms from "./Terms";
+import Privacy from "./Privacy";
 
 const RoutesList = () => {
     return (
@@ -23,6 +24,7 @@ const RoutesList = () => {
                 <Route exact path="/admin-users" element={<AdminUsers />} />
                 <Route exact path="/admin-centers" element={<CentersList />} />
                 <Route exact path="/terms" element={<Terms />} />
+                <Route exact path="/privacy" element={<Privacy />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             {/* <Footer /> */}

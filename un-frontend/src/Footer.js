@@ -14,7 +14,7 @@ const Footer = () => {
                 <Link to="/about"><p className="footer-link">About Us</p></Link>
                 <p style={{ whiteSpace: "pre" }}>  |  </p>
 
-                <Link to="/privacy-policy"><p className="footer-link">Privacy Policy</p></Link>
+                <Link to="/privacy"><p className="footer-link">Privacy Policy</p></Link>
                 <p style={{ whiteSpace: "pre" }}>  |  </p>
 
                 <Link to="/terms"><p className="footer-link">Terms of Service</p></Link>
