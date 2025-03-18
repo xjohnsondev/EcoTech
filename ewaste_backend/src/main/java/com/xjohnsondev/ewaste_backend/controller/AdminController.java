@@ -73,6 +73,11 @@ public class AdminController {
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        return ResponseEntity.ok("Logged out successfully");
+    }
+
     @PostMapping("/create-admin")
     public ResponseEntity<String> createAdmin(@RequestBody Admin admin) {
         try {
