@@ -20,6 +20,7 @@ public class CenterController {
         this.centerRepo = centerRepo;
     }
 
+    @CrossOrigin("http://localhost:3000/admin-centers")
     @GetMapping("/get-centers")
     public ResponseEntity<List<Center>> getAllCenters() {
         // Retrieve all centers from the database

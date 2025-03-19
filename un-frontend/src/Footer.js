@@ -8,8 +8,6 @@ const Footer = () => {
                 <p>© {new Date().getFullYear()} EcoTech. All rights reserved.</p>
             </div>
             <div className="footer-link-list">
-                <Link><p className="footer-link">Geolocator</p></Link>
-                <p style={{ whiteSpace: "pre" }}>  |  </p>
 
                 <Link to="/about"><p className="footer-link">About Us</p></Link>
                 <p style={{ whiteSpace: "pre" }}>  |  </p>

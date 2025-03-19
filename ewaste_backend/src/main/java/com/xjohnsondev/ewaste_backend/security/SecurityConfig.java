@@ -4,7 +4,6 @@ import com.xjohnsondev.ewaste_backend.model.Admin;
 import com.xjohnsondev.ewaste_backend.repository.AdminRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -56,17 +55,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll() // Allow access to /login
-
-
+                        .requestMatchers("/get-centers").permitAll()
+                        .requestMatchers("/get-admin-users").authenticated()
+                        
                         /// BE SURE TO REMOVE OTHER requestMatchers before launch
 
-                        .requestMatchers("/get-centers").permitAll()
-                        .requestMatchers("/add-centers").permitAll()
-                        .requestMatchers(HttpMethod.PUT,"/edit-center/**").permitAll()                        .requestMatchers("/create-admin").permitAll()
-                        .requestMatchers("/get-admin-users").permitAll()
-                        .requestMatchers("/approved-centers").permitAll()
-                        .anyRequest().permitAll()
-                        // Require authentication for all other requests
+//                      .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Set session policy to stateless

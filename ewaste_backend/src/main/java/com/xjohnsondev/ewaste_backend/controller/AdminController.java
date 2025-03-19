@@ -93,7 +93,7 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating admin: " + e.getMessage());
         }
     }
-
+    @CrossOrigin("http://localhost:3000/admin-users")
     @GetMapping("/get-admin-users")
     public List<Admin> getAllUsers() {
         // Fetches all admin users from the repository

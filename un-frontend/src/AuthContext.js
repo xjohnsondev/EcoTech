@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
     const [authToken, setAuthToken] = useState(localStorage.getItem("authToken") || null);
 
     // Save token in localStorage when it changes

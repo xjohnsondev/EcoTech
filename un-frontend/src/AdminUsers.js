@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useAuth } from "./AuthContext";
 import { Container, Table } from 'react-bootstrap';
 import './AdminUsers.css';
 
 const AdminUsers = () => {
+    const { authToken } = useAuth();
     const [admins, setAdmins] = useState([]);
 
     useEffect(() => {
         const fetchAdminUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/get-admin-users');
-                console.log(response.data);
+                const response = await axios.get("http://localhost:8080/get-admin-users", {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });                
+                // console.log(response.data);
                 setAdmins(response.data);
             } catch (error) {
                 console.error("Error fetching admin users:", error);

@@ -20,11 +20,10 @@ const CentersList = () => {
         "REJECTED": "danger",
     };
 
-    // 🔥 Redirect to login if no authToken
+    // Redirect to home if no authToken
     useEffect(() => {
         if (!authToken) {
-            // console.error("No authentication token found. Redirecting to login...");
-            navigate("/login");
+            navigate("/");
         }
     }, [authToken, navigate]);
 
@@ -34,8 +33,7 @@ const CentersList = () => {
             try {
                 const response = await axios.get("http://localhost:8080/get-centers", {
                     headers: {
-                        // Attach token in request header
-                        Authorization: `${authToken}`,
+                        Authorization: `Bearer ${authToken}`,
                     },
                 });
                 // console.table(response.data);
