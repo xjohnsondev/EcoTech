@@ -30,7 +30,6 @@ const CentersList = () => {
     useEffect(() => {
         const fetchCenters = async () => {
             if (!authToken) {
-                console.log("no token available");
                 return;
             } // Stop request if no token is available
             try {
@@ -81,11 +80,11 @@ const CentersList = () => {
         try {
             // Send the status update request to the backend with the new status
             const response = await axios.put(
-                `http://localhost:8080/edit-center/${id}`,
+                `http://localhost:8080/admin/edit-center/${id}`,
                 { status: newStatus },
                 {
                     headers: {
-                        Authorization: `${authToken}`,
+                        Authorization: `Bearer ${authToken}`,
                     },
                 }
             );

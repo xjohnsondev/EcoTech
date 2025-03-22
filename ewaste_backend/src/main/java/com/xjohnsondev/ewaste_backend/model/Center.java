@@ -18,6 +18,7 @@ public class Center {
     @Column(nullable = false)
     private String phone;
 
+
     @Column(nullable = false)
     private double latitude;
 
@@ -95,5 +96,19 @@ public class Center {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Center{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

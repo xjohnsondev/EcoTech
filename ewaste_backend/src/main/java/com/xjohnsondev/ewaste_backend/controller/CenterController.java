@@ -88,43 +88,91 @@ public class CenterController {
         return centerRepo.saveAll(newCenters);
     }
 
-    @PutMapping("/edit-center/{id}")
-    public Center updateCenter(@RequestBody Map<String, Object> updates, @PathVariable Long id) {
-        return centerRepo.findById(id)
-                .map(center -> {
-                    if (updates.containsKey("status")) {
-                        center.setStatus((String) updates.get("status"));
-                    }
-                    if (updates.containsKey("name")) {
-                        center.setName((String) updates.get("name"));
-                    }
-                    if (updates.containsKey("address")) {
-                        center.setAddress((String) updates.get("address"));
-                    }
-                    if (updates.containsKey("phone")) {
-                        center.setPhone((String) updates.get("phone"));
-                    }
-                    if (updates.containsKey("latitude")) {
-                        center.setLatitude((Double) updates.get("latitude"));
-                    }
-                    if (updates.containsKey("longitude")) {
-                        center.setLongitude((Double) updates.get("longitude"));
-                    }
-                    if (updates.containsKey("description")) {
-                        center.setDescription((String) updates.get("description"));
-                    }
-                    return centerRepo.save(center);
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with ID " + id + " not found"));
-    }
+    @PutMapping("/admin/edit-center/{id}")
+    public Center updateCenter(
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestBody Map<String, Object> updates,
+            @PathVariable Long id) {
 
-    @DeleteMapping("/delete-center/{id}")
-    public String deleteCenter(@PathVariable Long id) {
-        if (!centerRepo.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with id " + id + " not found");
+        // Validate Authorization header
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
         }
 
-        centerRepo.deleteById(id);
-        return "Center with id " + id + " has been deleted";
+        try {
+            // Extract and validate JWT token
+            String token = authHeader.substring(7); // Remove "Bearer " prefix
+            String username = jwtUtil.extractUsername(token);
+
+            if (!jwtUtil.validateToken(token, username)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+            }
+
+            return centerRepo.findById(id)
+                    .map(center -> {
+                        if (updates.containsKey("status")) {
+                            center.setStatus((String) updates.get("status"));
+                        }
+                        if (updates.containsKey("name")) {
+                            center.setName((String) updates.get("name"));
+                        }
+                        if (updates.containsKey("address")) {
+                            center.setAddress((String) updates.get("address"));
+                        }
+                        if (updates.containsKey("phone")) {
+                            center.setPhone((String) updates.get("phone"));
+                        }
+                        if (updates.containsKey("latitude")) {
+                            center.setLatitude((Double) updates.get("latitude"));
+                        }
+                        if (updates.containsKey("longitude")) {
+                            center.setLongitude((Double) updates.get("longitude"));
+                        }
+                        if (updates.containsKey("description")) {
+                            center.setDescription((String) updates.get("description"));
+                        }
+                        System.out.println("Updated center " + center.toString());
+                        return centerRepo.save(center);
+                    })
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with ID " + id + " not found"));
+        } catch (ResponseStatusException e) {
+            throw e; // Rethrow known exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while updating the center");
+        }
+    }
+
+    @DeleteMapping("/admin/delete-center/{id}")
+    public String deleteCenter(
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @PathVariable Long id) {
+
+        // Validate Authorization header
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
+        }
+
+        try {
+            // Extract and validate JWT token
+            String token = authHeader.substring(7); // Remove "Bearer " prefix
+            String username = jwtUtil.extractUsername(token);
+
+            if (!jwtUtil.validateToken(token, username)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+            }
+
+            if (!centerRepo.existsById(id)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with id " + id + " not found");
+            }
+            // Delete center
+            centerRepo.deleteById(id);
+            return "Center with id " + id + " has been deleted";
+        } catch (ResponseStatusException e) {
+            throw e; // Rethrow known exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while updating the center");
+        }
     }
 }

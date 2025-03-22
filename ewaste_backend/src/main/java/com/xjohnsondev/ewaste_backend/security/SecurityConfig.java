@@ -65,6 +65,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/get-centers").authenticated()
+                        .requestMatchers("/admin/edit-center/*").authenticated()
+                        .requestMatchers("/admin/delete-center/*").authenticated()
                         .requestMatchers("/admin/get-users").authenticated()
                         .anyRequest().permitAll() // Allow other requests
                 )

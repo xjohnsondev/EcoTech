@@ -25,7 +25,6 @@ const AddCenter = () => {
     const validatePhoneNumber = (phoneNumber) => {
         // Validate phone number is 10 digits
         const newPhone = phoneNumber.replace(/\D/g, "");
-        console.log(newPhone);
         if (newPhone.length !== 10) {
             setPhoneError("Phone number must be 10 digits.");
             return null;
@@ -97,6 +96,15 @@ const AddCenter = () => {
                     status: "PENDING",
                 }
             ]);
+
+            // Clear form fields on successful submission
+            businessNameRef.current.value = "";
+            businessContactRef.current.value = "";
+            businessDescriptionRef.current.value = "";
+            streetNameRef.current.value = "";
+            cityRef.current.value = "";
+            stateRef.current.value = "";
+            zipCodeRef.current.value = "";
         } catch (error) {
             console.error("Error submitting center:", error);
             setErrors("An error occurred while submitting the center. Please try again.");

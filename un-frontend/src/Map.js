@@ -18,7 +18,6 @@ const Map = () => {
         const fetchCenters = async () => {
             try {
                 const response = await axios.get("http://localhost:8080/public/get-centers");
-                console.log(response.data);
                 setCenters(response.data);
             } catch (error) {
                 setError("Failed to fetch centers");

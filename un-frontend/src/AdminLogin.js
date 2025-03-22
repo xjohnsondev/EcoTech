@@ -27,19 +27,15 @@ const AdminLogin = () => {
         if (!loginData.password.trim()) newErrors.password = 'Password is required.';
 
         setErrors(newErrors);
-        console.log('Errors:', newErrors); // Debugging
-
         setValidated(true);
 
         // If no errors, proceed with submission
         if (Object.keys(newErrors).length === 0) {
-            console.log('Form submitted:', loginData);
             try {
                 const response = await axios.post(`http://localhost:8080/login`, {
                     username: loginData.username,
                     password: loginData.password,
                 });
-                console.log('Login successful:', response.data);
                 setAuthToken(response.data.authToken);  // Store token in context
                 navigate("/admin-portal");
             } catch (error) {
