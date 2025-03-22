@@ -3,6 +3,7 @@ package com.xjohnsondev.ewaste_backend.controller;
 import com.xjohnsondev.ewaste_backend.model.Admin;
 import com.xjohnsondev.ewaste_backend.repository.AdminRepo;
 import com.xjohnsondev.ewaste_backend.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,8 +22,10 @@ import java.util.Map;
 @CrossOrigin("http://localhost:3000")
 public class AdminController {
 
+    @Autowired
     private final AdminRepo adminRepo;
     private final AuthenticationManager authenticationManager;
+    @Autowired
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
@@ -93,18 +96,45 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating admin: " + e.getMessage());
         }
     }
-    @CrossOrigin("http://localhost:3000/admin-users")
-    @GetMapping("/get-admin-users")
-    public List<Admin> getAllUsers() {
-        // Fetches all admin users from the repository
-        List<Admin> admins = adminRepo.findAll();
-
-        // Checks if no admin users are found
-        if (admins.isEmpty()) {
-            // Throws an exception
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No admin users found.");
+    @GetMapping("/admin/get-users")
+    public ResponseEntity<List<Admin>> getAllUsers(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        if (authHeader != null) {
+            System.out.println("Loading admins");
+        } else {
+            System.out.println("Empty header");
         }
-        // Returns the list of all admin users
-        return admins;
+
+        // Early return if Authorization header is missing
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
+        }
+
+        try {
+            // Extract and validate JWT token
+            String token = authHeader.substring(7); // Remove "Bearer " prefix
+            String username = jwtUtil.extractUsername(token);
+
+            if (!jwtUtil.validateToken(token, username)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+            }
+
+            // Fetch all admin users from the repository
+            List<Admin> admins = adminRepo.findAllByOrderByIdAsc();
+
+            // Checks if no admin users are found
+            if (admins.isEmpty()) {
+                // Returns NO_CONTENT if no users are found
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            // Returns the list of all admin users
+            return ResponseEntity.ok(admins);
+
+        } catch (ResponseStatusException e) {
+            throw e; // Rethrow known exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while retrieving centers");
+        }
     }
 }

@@ -19,7 +19,7 @@ public class Admin {
     private String password;
 
     @Column(nullable = false)
-    private String role = "ADMIN";
+    private String role = "ADMIN"; // Role remains a single value
 
     public Admin() {
     }

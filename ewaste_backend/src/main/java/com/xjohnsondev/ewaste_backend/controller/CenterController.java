@@ -2,6 +2,8 @@ package com.xjohnsondev.ewaste_backend.controller;
 
 import com.xjohnsondev.ewaste_backend.model.Center;
 import com.xjohnsondev.ewaste_backend.repository.CenterRepo;
+import com.xjohnsondev.ewaste_backend.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +17,63 @@ import java.util.Map;
 public class CenterController {
 
     private final CenterRepo centerRepo;
+    private final JwtUtil jwtUtil;
 
-    public CenterController(CenterRepo centerRepo) {
+    @Autowired
+    public CenterController(CenterRepo centerRepo, JwtUtil jwtUtil) {
         this.centerRepo = centerRepo;
+        this.jwtUtil = jwtUtil;
     }
 
-    @CrossOrigin("http://localhost:3000/admin-centers")
-    @GetMapping("/get-centers")
+    @GetMapping("/public/get-centers")
     public ResponseEntity<List<Center>> getAllCenters() {
-        // Retrieve all centers from the database
         List<Center> centers = centerRepo.findAllByOrderByIdAsc();
 
-        // If no centers are found, return HTTP status 204 No Content
         if (centers.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No centers found");
         }
 
-        // Return queried centers (or an empty list with HTTP 200 if no centers)
         return ResponseEntity.ok(centers);
     }
 
-    // Add a list of new centers to the database
+    @GetMapping("/admin/get-centers")
+    public ResponseEntity<List<Center>> getAllCentersAdmin(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        if (authHeader != null) {
+            System.out.println("Loading centers");
+        } else {
+            System.out.println("Empty header");
+        }
+
+        // Early return if Authorization header is missing
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Missing or invalid Authorization header");
+        }
+
+        try {
+            // Extract and validate JWT token
+            String token = authHeader.substring(7); // Remove "Bearer " prefix
+            String username = jwtUtil.extractUsername(token);
+
+            if (!jwtUtil.validateToken(token, username)) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+            }
+
+            // Fetch centers from the repository
+            List<Center> centers = centerRepo.findAllByOrderByIdAsc();
+            if (centers.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+            return ResponseEntity.ok(centers);
+        } catch (ResponseStatusException e) {
+            throw e; // Rethrow known exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while retrieving centers");
+        }
+    }
+
     @PostMapping("/add-centers")
     public List<Center> newCenters(@RequestBody List<Center> newCenters) {
-        // If the provided list is empty, return a bad request response
         if (newCenters.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "List cannot be empty");
         }
@@ -50,17 +85,13 @@ public class CenterController {
             }
         }
 
-        // Save all centers and return the saved list
         return centerRepo.saveAll(newCenters);
     }
 
-    // Update an existing center by its ID
     @PutMapping("/edit-center/{id}")
     public Center updateCenter(@RequestBody Map<String, Object> updates, @PathVariable Long id) {
-        // Find the center by ID, if it exists
         return centerRepo.findById(id)
                 .map(center -> {
-                    // Update fields if they are present in the request
                     if (updates.containsKey("status")) {
                         center.setStatus((String) updates.get("status"));
                     }
@@ -82,24 +113,18 @@ public class CenterController {
                     if (updates.containsKey("description")) {
                         center.setDescription((String) updates.get("description"));
                     }
-                    // Save and return the updated center
                     return centerRepo.save(center);
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with ID " + id + " not found"));
     }
 
-    // Delete a center by its ID
     @DeleteMapping("/delete-center/{id}")
     public String deleteCenter(@PathVariable Long id) {
-        // If the center does not exist, return a not found error
         if (!centerRepo.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Center with id " + id + " not found");
         }
 
-        // Delete the center from the database
         centerRepo.deleteById(id);
-
-        // Return a success message indicating that the center was deleted
         return "Center with id " + id + " has been deleted";
     }
 }

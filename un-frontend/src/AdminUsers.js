@@ -10,20 +10,20 @@ const AdminUsers = () => {
 
     useEffect(() => {
         const fetchAdminUsers = async () => {
+            if (!authToken) return;  // Stop request if no token is available
             try {
-                const response = await axios.get("http://localhost:8080/get-admin-users", {
+                const response = await axios.get("http://localhost:8080/admin/get-users", {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
-                    },
+                    }
                 });                
-                // console.log(response.data);
                 setAdmins(response.data);
             } catch (error) {
                 console.error("Error fetching admin users:", error);
             }
         };
         fetchAdminUsers();
-    }, []);
+    }, [authToken]);
 
     return (
         <div className='admin-users-display'>

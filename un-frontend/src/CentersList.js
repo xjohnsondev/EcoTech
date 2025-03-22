@@ -29,16 +29,19 @@ const CentersList = () => {
 
     useEffect(() => {
         const fetchCenters = async () => {
-            if (!authToken) return; // Stop request if no token is available
+            if (!authToken) {
+                console.log("no token available");
+                return;
+            } // Stop request if no token is available
             try {
-                const response = await axios.get("http://localhost:8080/get-centers", {
+                const response = await axios.get("http://localhost:8080/admin/get-centers", {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
                 });
                 // console.table(response.data);
                 setCenters(response.data);
-                setFilteredCenters(response.data); // initial render will default to show all centers
+                setFilteredCenters(response.data); // Initial render will default to show all centers
             } catch (error) {
                 console.error("Error fetching centers:", error);
                 if (error.response?.status === 401) {
@@ -71,6 +74,7 @@ const CentersList = () => {
                 return center.status === stat;
             }));
         }
+        setCurrentPage(1);
     };
 
     const handleStatusChange = async (id, newStatus) => {
