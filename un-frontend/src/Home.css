@@ -104,4 +104,15 @@
     .header-photos {
         display: none;
     }
+
+    .header-text {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 500px) {
+    .short {
+        height: 300px;
+        width: 210px;
+    }
 }
