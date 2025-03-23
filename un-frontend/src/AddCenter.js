@@ -85,7 +85,7 @@ const AddCenter = () => {
             const { latitude, longitude } = await UseGetLatLong(address);
 
             // Send new center to database
-            await axios.post(`http://localhost:8080/add-centers`, [
+            await axios.post(`https://ecotech-server.onrender.com/add-centers`, [
                 {
                     name: businessName,
                     address: address,

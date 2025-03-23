@@ -12,7 +12,7 @@ const AdminUsers = () => {
         const fetchAdminUsers = async () => {
             if (!authToken) return;  // Stop request if no token is available
             try {
-                const response = await axios.get("http://localhost:8080/admin/get-users", {
+                const response = await axios.get("https://ecotech-server.onrender.com/admin/get-users", {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     }

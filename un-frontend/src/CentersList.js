@@ -33,7 +33,7 @@ const CentersList = () => {
                 return;
             } // Stop request if no token is available
             try {
-                const response = await axios.get("http://localhost:8080/admin/get-centers", {
+                const response = await axios.get("https://ecotech-server.onrender.com/admin/get-centers", {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -80,7 +80,7 @@ const CentersList = () => {
         try {
             // Send the status update request to the backend with the new status
             const response = await axios.put(
-                `http://localhost:8080/admin/edit-center/${id}`,
+                `https://ecotech-server.onrender.com/admin/edit-center/${id}`,
                 { status: newStatus },
                 {
                     headers: {

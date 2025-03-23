@@ -32,7 +32,7 @@ const AdminLogin = () => {
         // If no errors, proceed with submission
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post(`http://localhost:8080/login`, {
+                const response = await axios.post(`https://ecotech-server.onrender.com/login`, {
                     username: loginData.username,
                     password: loginData.password,
                 });

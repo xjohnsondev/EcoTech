@@ -17,7 +17,7 @@ const Map = () => {
         // Fetch all recycling centers from database
         const fetchCenters = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/public/get-centers");
+                const response = await axios.get("https://ecotech-server.onrender.com/public/get-centers");
                 setCenters(response.data);
             } catch (error) {
                 setError("Failed to fetch centers");
